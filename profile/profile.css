@@ -1,0 +1,298 @@
+/* ==========================================================================
+   Panchved Doctor Portal - Profile Form Stylesheet (Fully Responsive)
+   ========================================================================== */
+
+/* Visually Hidden (screen-reader only) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Profile Card Container
+   ========================================================================== */
+.profile-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-card);
+  padding: 32px 36px 36px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Profile Form
+   ========================================================================== */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* ==========================================================================
+   Profile Image Section
+   ========================================================================== */
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-avatar-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.profile-avatar-circle:hover {
+  box-shadow: 0 4px 14px rgba(0, 130, 138, 0.25);
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   Form Fields Grid (2-column layout)
+   ========================================================================== */
+.profile-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+}
+
+/* ==========================================================================
+   Individual Field Group
+   ========================================================================== */
+.profile-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Field Labels */
+.profile-field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.01em;
+}
+
+.required-star {
+  color: #ef4444;
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* Input Container */
+.profile-input-container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-border-light);
+  border-radius: var(--radius-btn);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.profile-input-container:hover {
+  border-color: #94a3b8;
+}
+
+.profile-input-container:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.15);
+}
+
+/* Input Fields */
+.profile-field-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 11px 16px;
+  font-family: inherit;
+  font-size: 0.925rem;
+  color: var(--color-text-main);
+  outline: none;
+  font-weight: 500;
+}
+
+.profile-field-input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Form Actions (Update Button)
+   ========================================================================== */
+.profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 6px;
+}
+
+.profile-update-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 44px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 130, 138, 0.2);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.profile-update-btn:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.3);
+}
+
+.profile-update-btn:active {
+  background-color: var(--color-primary-active);
+  transform: scale(0.98);
+}
+
+.profile-update-btn:focus-visible {
+  outline: 3px solid rgba(0, 130, 138, 0.25);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Responsive: Tablets (≤ 900px)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .profile-card {
+    padding: 24px 22px 28px;
+  }
+
+  .profile-fields-grid {
+    gap: 16px 20px;
+  }
+
+  .profile-field-input {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .profile-update-btn {
+    padding: 10px 36px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Mobile (≤ 768px) — Single column layout
+   ========================================================================== */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 20px 16px 24px;
+    border-radius: 12px;
+  }
+
+  /* Stack fields into single column */
+  .profile-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .profile-form {
+    gap: 20px;
+  }
+
+  .profile-avatar-circle {
+    width: 58px;
+    height: 58px;
+  }
+
+  .profile-avatar-circle svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-field-label {
+    font-size: 0.85rem;
+  }
+
+  .profile-field-input {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  /* Update button spans full width on mobile */
+  .profile-form-actions {
+    justify-content: stretch;
+  }
+
+  .profile-update-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Small Phones (≤ 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 16px 12px 20px;
+    border-radius: 10px;
+  }
+
+  .profile-form {
+    gap: 16px;
+  }
+
+  .profile-fields-grid {
+    gap: 14px;
+  }
+
+  .profile-field-label {
+    font-size: 0.8rem;
+  }
+
+  .profile-field-input {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+  }
+
+  .profile-avatar-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .profile-avatar-circle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .profile-update-btn {
+    padding: 11px 16px;
+    font-size: 0.9rem;
+  }
+}
