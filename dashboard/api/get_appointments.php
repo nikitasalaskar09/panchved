@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Appointments API
+ * Ocayur Doctor Portal - Get Appointments API
  * Fetches appointments dynamically from `appointments` table with tab filtering, search & pagination
  */
 

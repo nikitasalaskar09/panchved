@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Workshops API
+ * Ocayur Doctor Portal - Get Workshops API
  * Fetches "My Workshops" (registered only) and "All Workshops" from MySQL
  */
 

@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - Patient Details Frontend Integration Logic
+ * Ocayur Doctor Portal - Patient Details Frontend Integration Logic
  * Connects patient-details.html to PHP Backend APIs
  */
 
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let doctorId = 1;
       let doctorName = 'Dr. Nidhi Jha';
       try {
-        const doc = JSON.parse(localStorage.getItem('panchved_doctor') || '{}');
+        const doc = JSON.parse((localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor')) || '{}');
         if (doc.id) doctorId = doc.id;
         if (doc.full_name) doctorName = doc.full_name;
       } catch (_) {}
@@ -585,7 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (rxDate) rxDate.textContent = rx.date || '08/09/2026';
           if (rxTime) rxTime.textContent = rx.time || '11:20 AM';
           if (rxDoctorPhone) rxDoctorPhone.textContent = rx.doctor_phone || rx.phone || '+91 7896543210';
-          if (rxDoctorEmail) rxDoctorEmail.textContent = rx.doctor_email || rx.email || rx.support_email || 'panchvedsupport@gmail.com';
+          if (rxDoctorEmail) rxDoctorEmail.textContent = rx.doctor_email || rx.email || rx.support_email || 'ocayursupport@gmail.com';
 
           // Medications Table
           if (rxMedicationRows && Array.isArray(rx.medications) && rx.medications.length > 0) {

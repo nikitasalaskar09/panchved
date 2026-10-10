@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Dashboard Data API
+ * Ocayur Doctor Portal - Dashboard Data API
  * Provides dynamic metrics, doctor info, today's consultations table, and pagination from MySQL
  */
 

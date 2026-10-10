@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Workshop Details API
+ * Ocayur Doctor Portal - Get Workshop Details API
  * Fetches single workshop details dynamically from MySQL database based on schema.sql
  */
 

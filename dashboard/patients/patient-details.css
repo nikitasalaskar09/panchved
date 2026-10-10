@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Patient Details & Health Progress Stylesheet
+   Ocayur Doctor Portal - Patient Details & Health Progress Stylesheet
    ========================================================================== */
 
 /* Back Link Navigation */
@@ -21,7 +21,7 @@
 }
 
 .back-nav-link:hover {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   transform: translateX(-3px);
 }
 
@@ -73,7 +73,7 @@
 }
 
 .patient-tab-btn.active {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   font-weight: 700;
 }
 
@@ -84,7 +84,7 @@
   left: 0;
   width: 100%;
   height: 2.5px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   border-radius: 2px 2px 0 0;
 }
 
@@ -94,7 +94,7 @@
   justify-content: center;
   height: 40px;
   padding: 0 24px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   border: none;
   border-radius: 8px;
   color: #ffffff;
@@ -103,13 +103,13 @@
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 6px;
-  box-shadow: 0 2px 4px rgba(0, 130, 138, 0.2);
+  box-shadow: 0 2px 4px rgba(72, 72, 49, 0.2);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
 }
 
 .btn-book-appointment:hover {
-  background-color: var(--color-primary-hover, #006e75);
-  box-shadow: 0 4px 10px rgba(0, 130, 138, 0.3);
+  background-color: var(--color-primary-hover, #373725);
+  box-shadow: 0 4px 10px rgba(72, 72, 49, 0.3);
   transform: translateY(-1px);
 }
 
@@ -174,7 +174,7 @@
 }
 
 .prescription-link {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   text-decoration: underline;
   font-weight: 600;
   transition: opacity var(--transition-fast, 0.15s ease);
@@ -229,7 +229,7 @@
 
 .icon-teal {
   background-color: #e0f2f1;
-  color: #00828a;
+  color: #484831;
 }
 
 .icon-magenta {
@@ -388,7 +388,7 @@
 
 /* Solid Teal Table Header (Image 2) */
 .appointments-table thead tr {
-  background-color: #00828a;
+  background-color: #484831;
   color: #ffffff;
 }
 
@@ -529,7 +529,7 @@
 
 .appt-dropdown-item:hover {
   background-color: #f8fafc;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
 }
 
 .appt-dropdown-item-icon {
@@ -541,7 +541,7 @@
 }
 
 .appt-dropdown-item:hover .appt-dropdown-item-icon {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
 }
 
 /* Appointments Footer & Pagination */
@@ -589,8 +589,8 @@
 }
 
 .page-arrow-btn:hover:not(:disabled) {
-  border-color: var(--color-primary, #00828a);
-  color: var(--color-primary, #00828a);
+  border-color: var(--color-primary, #484831);
+  color: var(--color-primary, #484831);
   background-color: #e0f2f1;
 }
 
@@ -694,7 +694,7 @@
 }
 
 .patient-card-name {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 4px 0;
@@ -742,8 +742,8 @@
 
 .form-input:focus,
 .form-select:focus {
-  border-color: var(--color-primary, #00828a);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.15);
+  border-color: var(--color-primary, #484831);
+  box-shadow: 0 0 0 3px rgba(72, 72, 49, 0.15);
 }
 
 .appointment-modal-footer {
@@ -755,7 +755,7 @@
 
 .btn-confirm-appointment {
   padding: 11px 28px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   color: #ffffff;
   border-radius: 8px;
   font-weight: 600;
@@ -766,8 +766,8 @@
 }
 
 .btn-confirm-appointment:hover {
-  background-color: var(--color-primary-hover, #006e75);
-  box-shadow: 0 4px 10px rgba(0, 130, 138, 0.25);
+  background-color: var(--color-primary-hover, #373725);
+  box-shadow: 0 4px 10px rgba(72, 72, 49, 0.25);
 }
 
 /* Success Modal */
@@ -845,7 +845,7 @@
   max-width: 240px;
   height: 46px;
   border-radius: 9999px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.95rem;
@@ -855,8 +855,8 @@
 }
 
 .btn-continue-success:hover {
-  background-color: var(--color-primary-hover, #006e75);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.3);
+  background-color: var(--color-primary-hover, #373725);
+  box-shadow: 0 4px 12px rgba(72, 72, 49, 0.3);
   transform: translateY(-1px);
 }
 
@@ -1075,7 +1075,7 @@
 .rx-col-title {
   font-size: 0.8125rem;
   font-weight: 700;
-  color: #00828a;
+  color: #484831;
   text-transform: capitalize;
 }
 

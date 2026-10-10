@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Patient Details & Appointments API
+ * Ocayur Doctor Portal - Get Patient Details & Appointments API
  * Fetches full patient profile, clinical metrics, appointments, and health progress history
  */
 

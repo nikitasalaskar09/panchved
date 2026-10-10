@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Strict Doctor Authentication API
+ * Ocayur Doctor Portal - Strict Doctor Authentication API
  * Authenticates doctors strictly using their registered phone number and password from the `doctors` table
  */
 

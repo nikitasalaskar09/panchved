@@ -1,13 +1,13 @@
-# Panchved - Doctor Portal
+# Ocayur - Doctor Portal
 
-Modern web portal for Panchved Ayurveda & Physiotherapy Rehab Center doctors.
+Modern web portal for Ocayur Ayurveda Lifestyle doctors.
 
 ## Modular Project Structure
 
 The project has been organized into modular directories where each feature module is contained in its own folder:
 
 ```text
-panchved/
+ocayur/
 ├── api/                      # Backend PHP endpoints & database operations
 ├── assets/                   # Shared image assets, brand logos & icons
 ├── appointments/             # Appointments & Prescriptions module

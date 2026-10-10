@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Packages & Protocol Details Stylesheet
+   Ocayur Doctor Portal - Packages & Protocol Details Stylesheet
+   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
    ========================================================================== */
 
 /* Search and Filter Section */
@@ -42,8 +43,8 @@
 
 .packages-search-input:focus {
   outline: none;
-  border-color: var(--color-primary, #00828a);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
+  border-color: var(--color-primary, #484831);
+  box-shadow: 0 0 0 3px rgba(72, 72, 49, 0.18);
 }
 
 .packages-search-input::placeholder {
@@ -63,7 +64,7 @@
   font-family: inherit;
   font-size: 0.925rem;
   font-weight: 500;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   cursor: pointer;
   transition: all var(--transition-fast, 0.15s ease);
   white-space: nowrap;
@@ -71,12 +72,12 @@
 
 .btn-filter-toggle:hover {
   background-color: #f8fafc;
-  border-color: var(--color-primary, #00828a);
-  color: var(--color-primary, #00828a);
+  border-color: var(--color-primary, #484831);
+  color: var(--color-primary, #484831);
 }
 
 .btn-filter-toggle svg {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
 }
 
 /* Section Title */
@@ -163,18 +164,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   flex-shrink: 0;
 }
 
-/* Magenta Action Button */
+/* Terracotta Action Button */
 .btn-view-protocol {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 44px;
-  background-color: #9d005e;
+  background-color: var(--color-accent, #723F1E);
   color: #ffffff;
   font-family: inherit;
   font-size: 0.925rem;
@@ -183,13 +184,13 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(157, 0, 94, 0.2);
+  box-shadow: 0 2px 8px rgba(114, 63, 30, 0.25);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
 }
 
 .btn-view-protocol:hover {
-  background-color: #82004e;
-  box-shadow: 0 4px 12px rgba(157, 0, 94, 0.3);
+  background-color: var(--color-accent-hover, #5B3218);
+  box-shadow: 0 4px 14px rgba(114, 63, 30, 0.35);
   transform: translateY(-1px);
 }
 
@@ -361,7 +362,7 @@
   gap: 6px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   text-decoration: none;
   transition: color var(--transition-fast, 0.15s ease);
 }

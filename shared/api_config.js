@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - Shared API Configuration & Session Utilities
+ * Ocayur Doctor Portal - Shared API Configuration & Session Utilities
  */
 
 (function () {
@@ -26,10 +26,10 @@
   };
 
   // Global Doctor Portal Auth Helper
-  window.PanchvedAuth = {
+  window.OcayurAuth = {
     getDoctor: function () {
       try {
-        const d = localStorage.getItem('panchved_doctor');
+        const d = localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor');
         return d ? JSON.parse(d) : null;
       } catch (e) {
         return null;
@@ -37,7 +37,7 @@
     },
     getUser: function () {
       try {
-        const u = localStorage.getItem('panchved_user');
+        const u = localStorage.getItem('ocayur_user') || localStorage.getItem('panchved_user');
         return u ? JSON.parse(u) : null;
       } catch (e) {
         return null;
@@ -50,7 +50,9 @@
       try {
         await fetch(window.getApiPath('logout.php'), { method: 'POST' });
       } catch (_) {}
+      localStorage.removeItem('ocayur_doctor');
       localStorage.removeItem('panchved_doctor');
+      localStorage.removeItem('ocayur_user');
       localStorage.removeItem('panchved_user');
       sessionStorage.clear();
       window.location.href = isInSubfolder ? '../index.html' : 'index.html';
@@ -118,7 +120,7 @@
           confirmBtn.addEventListener('click', () => {
             confirmBtn.disabled = true;
             confirmBtn.textContent = 'Logging out...';
-            window.PanchvedAuth.logout();
+            window.OcayurAuth.logout();
           });
         }
       }
@@ -142,15 +144,18 @@
     }
   };
 
+  // Backwards compatibility alias
+  window.PanchvedAuth = window.OcayurAuth;
+
   // Wire up logout handlers globally
   document.addEventListener('DOMContentLoaded', () => {
-    window.PanchvedAuth.updateUI();
+    window.OcayurAuth.updateUI();
 
     const logoutBtns = document.querySelectorAll('.logout-btn, #logoutBtn');
     logoutBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        window.PanchvedAuth.showLogoutModal();
+        window.OcayurAuth.showLogoutModal();
       });
     });
   });

@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Update Patient Status API
+ * Ocayur Doctor Portal - Update Patient Status API
  */
 
 header('Content-Type: application/json; charset=utf-8');

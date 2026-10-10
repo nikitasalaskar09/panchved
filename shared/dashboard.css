@@ -1,35 +1,53 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Dashboard Stylesheet (Fully Responsive)
+   Ocayur Doctor Portal - Dashboard Stylesheet (Fully Responsive)
+   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
    ========================================================================== */
 
 /* Design Tokens & Custom Properties */
 :root {
-  --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-base: 'Proxima Nova Alt', 'Proxima Nova', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
 
-  /* Brand Colors */
-  --color-primary: #00828a;
-  --color-primary-hover: #006e75;
-  --color-primary-active: #005a60;
-  --color-primary-light: #e0f2f1;
-  --color-primary-focus-ring: rgba(0, 130, 138, 0.2);
+  /* Official Brand Colors - Ocayur Ayurveda Lifestyle (@studionori.co) */
+  --brand-primary: #484831;          /* Official Deep Olive Green */
+  --brand-primary-hover: #373725;    /* Deeper Olive */
+  --brand-primary-active: #28281B;   /* Darkest Olive */
+  --brand-primary-light: rgba(72, 72, 49, 0.08);
+  --brand-primary-focus-ring: rgba(72, 72, 49, 0.22);
 
-  /* Neutral Palette */
-  --color-bg-page: #f8fafc;
-  --color-card-bg: #ffffff;
-  --color-text-main: #1e293b;
-  --color-text-muted: #64748b;
-  --color-text-subtle: #94a3b8;
+  --brand-accent: #723F1E;           /* Official Warm Earth Brown / Terracotta */
+  --brand-accent-hover: #5B3218;     /* Deeper Earth Brown */
+  --brand-accent-active: #472611;
+  --brand-accent-light: rgba(114, 63, 30, 0.08);
+  --brand-accent-focus-ring: rgba(114, 63, 30, 0.22);
+
+  --color-primary: var(--brand-primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-primary-active: var(--brand-primary-active);
+  --color-primary-light: var(--brand-primary-light);
+  --color-primary-focus-ring: var(--brand-primary-focus-ring);
+
+  --color-accent: var(--brand-accent);
+  --color-accent-hover: var(--brand-accent-hover);
+  --color-accent-light: var(--brand-accent-light);
+
+  /* Neutral Palette - Official Warm Ivory Linen #fff7ec */
+  --color-bg-page: #FFF7EC;
+  --color-card-bg: #FFFFFF;
+  --color-text-main: #2B2B1E;
+  --color-text-muted: #5C5A48;
+  --color-text-subtle: #8E8A76;
 
   /* Border & Divider */
-  --color-border-card: #e2e8f0;
-  --color-border-light: #e2e8f0;
-  --color-border-subtle: #f1f5f9;
-  --color-border-hover: #cbd5e1;
+  --color-border-card: #ECE3D2;
+  --color-border-light: #ECE3D2;
+  --color-border-subtle: #F7EFE3;
+  --color-border-hover: #DCD0BC;
 
   /* Shadows */
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 4px 12px -2px rgba(0, 130, 138, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  --shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px -2px rgba(72, 72, 49, 0.05), 0 2px 6px -1px rgba(72, 72, 49, 0.03);
+  --shadow-hover: 0 8px 24px -4px rgba(72, 72, 49, 0.12), 0 4px 8px -2px rgba(72, 72, 49, 0.06);
+  --shadow-dropdown: 0 10px 25px -5px rgba(72, 72, 49, 0.12), 0 8px 10px -6px rgba(72, 72, 49, 0.06);
 
   /* Border Radius */
   --radius-card: 16px;
@@ -37,7 +55,7 @@
   --radius-pill: 9999px;
 
   /* Transitions */
-  --transition-fast: 0.15s ease;
+  --transition-fast: 0.18s ease;
   --transition-normal: 0.25s ease;
 }
 
@@ -170,8 +188,9 @@ html, body {
 }
 
 .sidebar-logo-img {
-  width: 125px;
+  width: 140px;
   height: auto;
+  max-height: 70px;
   object-fit: contain;
   display: block;
 }
@@ -259,7 +278,7 @@ html, body {
 
 .logout-btn:hover {
   background-color: var(--color-primary-light);
-  box-shadow: 0 2px 6px rgba(0, 130, 138, 0.15);
+  box-shadow: 0 2px 8px rgba(72, 72, 49, 0.15);
 }
 
 /* ==========================================================================
@@ -284,9 +303,10 @@ html, body {
 }
 
 .welcome-heading .page-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-text-main);
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
   line-height: 1.2;
 }
 
@@ -314,7 +334,7 @@ html, body {
 
 .doctor-profile-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.12);
+  box-shadow: 0 4px 14px rgba(72, 72, 49, 0.12);
   transform: translateY(-1px);
 }
 
@@ -439,9 +459,11 @@ html, body {
 }
 
 .section-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-text-main);
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.01em;
 }
 
 /* Responsive Table */

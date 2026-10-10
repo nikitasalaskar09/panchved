@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Packages API
+ * Ocayur Doctor Portal - Get Packages API
  * Fetches all packages/protocols with live search and filtering based on schema.sql
  */
 

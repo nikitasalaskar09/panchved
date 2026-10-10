@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Update Profile API
+ * Ocayur Doctor Portal - Update Profile API
  * Updates doctor profile in both `doctors` and `users` tables
  */
 

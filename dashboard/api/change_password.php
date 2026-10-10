@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Change Password API
+ * Ocayur Doctor Portal - Change Password API
  * Updates doctor password in `doctors` and `users` tables
  */
 

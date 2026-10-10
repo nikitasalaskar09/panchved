@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Prescription API
+ * Ocayur Doctor Portal - Get Prescription API
  * Fetches structured prescription details dynamically from MySQL database
  */
 
@@ -109,7 +109,7 @@ if (!$rxRecord && $patientId > 0) {
                     'notes' => $decoded['notes'] ?? $aRow['notes'] ?? 'Gandbush ( Cow Ghee + Triphala Powder )',
                     'doctor_specialty' => $decoded['doctor_specialty'] ?? 'Ayurvedic Medicine',
                     'doctor_phone' => $decoded['phone'] ?? '+91 7896543210',
-                    'doctor_email' => $decoded['email'] ?? $decoded['support_email'] ?? 'panchvedsupport@gmail.com'
+                    'doctor_email' => $decoded['email'] ?? $decoded['support_email'] ?? 'ocayursupport@gmail.com'
                 ];
             }
         }
@@ -162,7 +162,7 @@ $responsePrescription = [
     'doctor_name' => $rxRecord['doctor_name'] ?? 'Dr. Ananya Prasad',
     'doctor_specialty' => $rxRecord['doctor_specialty'] ?? 'Ayurvedic Medicine',
     'doctor_phone' => $rxRecord['doctor_phone'] ?? '+91 7896543210',
-    'doctor_email' => $rxRecord['doctor_email'] ?? 'panchvedsupport@gmail.com'
+    'doctor_email' => $rxRecord['doctor_email'] ?? 'ocayursupport@gmail.com'
 ];
 
 echo json_encode([

@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - Core Frontend Logic (Shared)
+ * Ocayur Doctor Portal - Core Frontend Logic (Shared)
  * Handles dynamic doctor profile fetching, session sync, dashboard metrics & consultations, profile updates, and UI interactions
  */
 
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cross-page / cross-tab automatic state synchronization
   window.addEventListener('storage', (e) => {
-    if (e.key === 'panchved_doctor' || e.key === 'panchved_user') {
+    if (e.key === 'ocayur_doctor' || e.key === 'panchved_doctor' || e.key === 'ocayur_user' || e.key === 'panchved_user') {
       try {
         if (e.newValue) {
           const updatedDoc = JSON.parse(e.newValue);
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data && data.success) {
         // Sync doctor header
         if (data.doctor) {
-          localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
+          localStorage.setItem('ocayur_doctor', JSON.stringify(data.doctor)); localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
           syncDoctorUI(data.doctor);
         }
 
@@ -453,11 +453,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Immediately apply cached local storage if available
     let cachedDoctor = null;
     try {
-      const cachedDoctorStr = localStorage.getItem('panchved_doctor');
+      const cachedDoctorStr = (localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor'));
       if (cachedDoctorStr) {
         cachedDoctor = JSON.parse(cachedDoctorStr);
       } else {
-        const cachedUserStr = localStorage.getItem('panchved_user');
+        const cachedUserStr = (localStorage.getItem('ocayur_user') || localStorage.getItem('panchved_user'));
         if (cachedUserStr) {
           cachedDoctor = JSON.parse(cachedUserStr);
         }
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
       if (data && data.success && data.doctor) {
-        localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
+        localStorage.setItem('ocayur_doctor', JSON.stringify(data.doctor)); localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
         syncDoctorUI(data.doctor);
         populateProfileForm(data.doctor);
       }
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let doctorId = null;
       let existingDoctor = {};
       try {
-        existingDoctor = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        existingDoctor = JSON.parse((localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor')) || (localStorage.getItem('ocayur_user') || localStorage.getItem('panchved_user')) || '{}');
         doctorId = existingDoctor.id || null;
       } catch (_) {}
 
@@ -622,23 +622,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok && result && result.success) {
           const docData = result.doctor || updatedDoctorLocal;
-          localStorage.setItem('panchved_doctor', JSON.stringify(docData));
-          localStorage.setItem('panchved_user', JSON.stringify(docData));
+          localStorage.setItem('ocayur_doctor', JSON.stringify(docData)); localStorage.setItem('panchved_doctor', JSON.stringify(docData));
+          localStorage.setItem('ocayur_user', JSON.stringify(docData)); localStorage.setItem('panchved_user', JSON.stringify(docData));
           syncDoctorUI(docData);
           populateProfileForm(docData);
           showToast('Profile updated successfully!', 'success');
         } else {
           // If server responds with custom message or offline mode, persist changes in state and show confirmation
-          localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
-          localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
+          localStorage.setItem('ocayur_doctor', JSON.stringify(updatedDoctorLocal)); localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
+          localStorage.setItem('ocayur_user', JSON.stringify(updatedDoctorLocal)); localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
           syncDoctorUI(updatedDoctorLocal);
           populateProfileForm(updatedDoctorLocal);
           showToast(result?.message || 'Profile updated successfully!', 'success');
         }
       } catch (err) {
         console.warn('Profile update network/offline save:', err);
-        localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
-        localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
+        localStorage.setItem('ocayur_doctor', JSON.stringify(updatedDoctorLocal)); localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
+        localStorage.setItem('ocayur_user', JSON.stringify(updatedDoctorLocal)); localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
         syncDoctorUI(updatedDoctorLocal);
         populateProfileForm(updatedDoctorLocal);
         showToast('Profile updated successfully!', 'success');
@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let doctorPhone = '';
       let doctorEmail = '';
       try {
-        const stored = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        const stored = JSON.parse((localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor')) || (localStorage.getItem('ocayur_user') || localStorage.getItem('panchved_user')) || '{}');
         doctorId = stored.id || null;
         doctorPhone = stored.phone_number || stored.phone || '';
         doctorEmail = stored.email || '';
@@ -833,11 +833,11 @@ document.addEventListener('DOMContentLoaded', () => {
   logoutButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (window.PanchvedAuth && typeof window.PanchvedAuth.showLogoutModal === 'function') {
-        window.PanchvedAuth.showLogoutModal();
+      const auth = window.OcayurAuth || window.PanchvedAuth; if (auth && typeof auth.showLogoutModal === 'function') {
+        auth.showLogoutModal();
       } else {
-        localStorage.removeItem('panchved_doctor');
-        localStorage.removeItem('panchved_user');
+        localStorage.removeItem('ocayur_doctor'); localStorage.removeItem('panchved_doctor');
+        localStorage.removeItem('ocayur_user'); localStorage.removeItem('panchved_user');
         sessionStorage.clear();
         window.location.href = isInSubfolder ? '../index.html' : 'index.html';
       }

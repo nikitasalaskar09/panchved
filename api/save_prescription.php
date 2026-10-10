@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Save Prescription API
+ * Ocayur Doctor Portal - Save Prescription API
  * Saves complete prescription, medical history, diagnosis, medication list, and notes
  */
 
@@ -73,7 +73,7 @@ $prescriptionData = [
     'examination_findings' => $examinationFindings,
     'notes' => $notes,
     'phone' => '+91 7896543210',
-    'support_email' => 'panchvedsupport@gmail.com'
+    'support_email' => 'ocayursupport@gmail.com'
 ];
 
 $prescriptionJson = json_encode($prescriptionData, JSON_UNESCAPED_UNICODE);
@@ -115,7 +115,7 @@ $timeNow = date('h:i A');
 
 $rxStmt = mysqli_prepare($connection1, "INSERT INTO `prescriptions` 
     (`prescription_code`, `patient_id`, `patient_name`, `doctor_id`, `doctor_name`, `doctor_specialty`, `doctor_phone`, `doctor_email`, `appointment_id`, `prescription_date`, `prescription_time`, `medical_history`, `symptoms`, `diagnosis`, `diagnosis_duration`, `medications`, `examination_findings`, `notes`) 
-    VALUES (?, ?, ?, ?, ?, ?, '+91 7896543210', 'panchvedsupport@gmail.com', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    VALUES (?, ?, ?, ?, ?, ?, '+91 7896543210', 'ocayursupport@gmail.com', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 if ($rxStmt) {
     mysqli_stmt_bind_param($rxStmt, "sisisssissssssss", 

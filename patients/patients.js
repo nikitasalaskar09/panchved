@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - My Patients Management & Integration Logic
+ * Ocayur Doctor Portal - My Patients Management & Integration Logic
  * Connects frontend UI to PHP Backend (api/get_patients.php, api/update_patient_status.php, api/add_diet.php, api/book_appointment.php)
  */
 
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sync Doctor info in Top Header
   try {
-    const docData = JSON.parse(localStorage.getItem('panchved_doctor') || '{}');
+    const docData = JSON.parse((localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor')) || '{}');
     if (docData.full_name) {
       const docNameEl = document.getElementById('doctorNameHeader');
       if (docNameEl) docNameEl.textContent = docData.full_name;
@@ -817,7 +817,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let doctorId = 1;
       let doctorName = 'Dr. Nidhi Jha';
       try {
-        const doc = JSON.parse(localStorage.getItem('panchved_doctor') || '{}');
+        const doc = JSON.parse((localStorage.getItem('ocayur_doctor') || localStorage.getItem('panchved_doctor')) || '{}');
         if (doc.id) doctorId = doc.id;
         if (doc.full_name) doctorName = doc.full_name;
       } catch (_) {}

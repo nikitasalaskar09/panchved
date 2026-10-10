@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - Packages Directory Frontend Logic
+ * Ocayur Doctor Portal - Packages Directory Frontend Logic
  * Connects packages.html with api/get_packages.php
  */
 

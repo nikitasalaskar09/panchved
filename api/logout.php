@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Logout API
+ * Ocayur Doctor Portal - Logout API
  * Destroys session and clears cookies
  */
 

@@ -1,5 +1,5 @@
 /**
- * Panchved Doctor Portal - Interactive Logic
+ * Ocayur Doctor Portal - Interactive Logic
  */
 
 // ==========================================
@@ -235,10 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok && data && data.success) {
         // Save authenticated doctor & user profile to localStorage for seamless cross-page sync
         if (data.doctor) {
-          localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
+          localStorage.setItem('ocayur_doctor', JSON.stringify(data.doctor)); localStorage.setItem('panchved_doctor', JSON.stringify(data.doctor));
         }
         if (data.user) {
-          localStorage.setItem('panchved_user', JSON.stringify(data.user));
+          localStorage.setItem('ocayur_user', JSON.stringify(data.user)); localStorage.setItem('panchved_user', JSON.stringify(data.user));
         }
 
         const doctorName = data.doctor?.full_name || data.user?.full_name || 'Doctor';

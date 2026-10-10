@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Appointments (Upcoming & History) Stylesheet
+   Ocayur Doctor Portal - Appointments (Upcoming & History) Stylesheet
+   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
    ========================================================================== */
 
 /* Appointments Tabs */
@@ -7,7 +8,7 @@
   display: flex;
   align-items: center;
   gap: 36px;
-  border-bottom: 1.5px solid var(--color-border-subtle, #f1f5f9);
+  border-bottom: 1.5px solid var(--color-border-subtle, #ECE3D2);
   padding-bottom: 0;
   margin-top: 4px;
 }
@@ -18,7 +19,7 @@
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--color-text-muted, #64748b);
+  color: var(--color-text-muted, #5C5A48);
   padding: 10px 4px 14px;
   cursor: pointer;
   position: relative;
@@ -26,11 +27,11 @@
 }
 
 .appointments-tab-btn:hover {
-  color: var(--color-text-main, #1e293b);
+  color: var(--color-text-main, #2B2B1E);
 }
 
 .appointments-tab-btn.active {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   font-weight: 700;
 }
 
@@ -41,7 +42,7 @@
   left: 0;
   width: 100%;
   height: 2.5px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   border-radius: 2px 2px 0 0;
 }
 
@@ -83,20 +84,20 @@
 
 .appointments-search-input:focus {
   outline: none;
-  border-color: var(--color-primary, #00828a);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
+  border-color: var(--color-primary, #484831);
+  box-shadow: 0 0 0 3px rgba(72, 72, 49, 0.18);
 }
 
 .appointments-search-input::placeholder {
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--color-text-muted, #8E8A76);
 }
 
 /* Table Card Container */
 .appointments-data-card {
   background-color: var(--color-card-bg, #ffffff);
-  border: 1px solid var(--color-border-card, #e2e8f0);
-  border-radius: var(--radius-card, 14px);
-  box-shadow: var(--shadow-card, 0 1px 3px rgba(0, 0, 0, 0.04));
+  border: 1px solid var(--color-border-card, #ECE3D2);
+  border-radius: var(--radius-card, 16px);
+  box-shadow: var(--shadow-card, 0 4px 20px -2px rgba(72, 72, 49, 0.05));
   overflow: hidden;
   width: 100%;
   margin-top: 8px;
@@ -118,7 +119,7 @@
 /* Header */
 .portal-appointments-table thead tr {
   background-color: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #ECE3D2;
 }
 
 .portal-appointments-table thead th {
@@ -133,12 +134,12 @@
 /* Body Rows */
 .portal-appointments-table tbody tr {
   background-color: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #F7EFE3;
   transition: background-color var(--transition-fast, 0.15s ease);
 }
 
 .portal-appointments-table tbody tr:hover {
-  background-color: #f8fafc;
+  background-color: rgba(72, 72, 49, 0.04);
 }
 
 .portal-appointments-table tbody td {
@@ -152,17 +153,17 @@
 /* Specific Cell Formats */
 .cell-id {
   font-weight: 700;
-  color: var(--color-text-main, #0f172a);
+  color: var(--color-text-main, #2B2B1E);
 }
 
 .cell-patient-name {
   font-weight: 500;
-  color: #1e293b;
+  color: #2B2B1E;
 }
 
 .cell-agenda {
   font-size: 0.8125rem;
-  color: #64748b;
+  color: #5C5A48;
   max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
@@ -170,7 +171,7 @@
 }
 
 .cell-duration {
-  color: #475569;
+  color: #5C5A48;
 }
 
 /* Meet Link (Upcoming Tab) */
@@ -186,18 +187,18 @@
 }
 
 .meet-link:hover {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   text-decoration: underline;
 }
 
 .meet-link svg {
-  color: #64748b;
+  color: #5C5A48;
   flex-shrink: 0;
   transition: color var(--transition-fast, 0.15s ease);
 }
 
 .meet-link:hover svg {
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
 }
 
 /* Add Prescription Button (History Tab) */
@@ -205,7 +206,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #0284c7;
+  background-color: var(--color-accent, #723F1E);
   color: #ffffff;
   font-family: inherit;
   font-size: 0.75rem;
@@ -215,12 +216,13 @@
   border: none;
   cursor: pointer;
   text-decoration: none;
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease);
   white-space: nowrap;
 }
 
 .btn-add-prescription:hover {
-  background-color: #0369a1;
+  background-color: var(--color-accent-hover, #5B3218);
   transform: translateY(-1px);
 }
 

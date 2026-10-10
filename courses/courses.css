@@ -1,23 +1,24 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Courses & Workshops Stylesheet
+   Ocayur Doctor Portal - Courses & Workshops Stylesheet
+   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
    ========================================================================== */
 
 /* Design Tokens specific to Courses */
 :root {
-  --course-btn-magenta: #8e154a;
-  --course-btn-magenta-hover: #780f3d;
-  --course-btn-magenta-active: #640a32;
-  --course-teal: #00828a;
-  --course-teal-hover: #006e75;
-  --course-teal-active: #005a60;
-  --course-teal-light: #e0f2f1;
-  --course-teal-soft: #f0fdfa;
-  --course-card-border: #e2e8f0;
-  --course-text-dark: #1e293b;
-  --course-text-body: #334155;
-  --course-text-muted: #64748b;
-  --course-text-subtle: #94a3b8;
-  --course-green-success: #10b981;
+  --course-btn-magenta: #723F1E;
+  --course-btn-magenta-hover: #5B3218;
+  --course-btn-magenta-active: #472611;
+  --course-teal: #484831;
+  --course-teal-hover: #373725;
+  --course-teal-active: #28281B;
+  --course-teal-light: rgba(72, 72, 49, 0.08);
+  --course-teal-soft: #FFF7EC;
+  --course-card-border: #ECE3D2;
+  --course-text-dark: #2B2B1E;
+  --course-text-body: #484831;
+  --course-text-muted: #5C5A48;
+  --course-text-subtle: #8E8A76;
+  --course-green-success: #2E7D32;
 }
 
 /* Sidebar Nav Icon Alignment & Visibility */
@@ -634,7 +635,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--course-teal, #00828a);
+  color: var(--course-teal, #484831);
   font-size: 0.925rem;
   font-weight: 600;
   background: none;
@@ -646,7 +647,7 @@
 }
 
 .btn-edit-details:hover {
-  color: var(--course-teal-hover, #006e75);
+  color: var(--course-teal-hover, #373725);
   opacity: 0.9;
 }
 
@@ -734,7 +735,7 @@
 }
 
 .checkout-form-input:focus {
-  border-color: var(--course-teal, #00828a);
+  border-color: var(--course-teal, #484831);
   box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.15);
 }
 
@@ -771,17 +772,17 @@
   font-weight: 600;
   font-family: inherit;
   color: #ffffff;
-  background-color: var(--course-teal, #00828a);
-  border: 1px solid var(--course-teal, #00828a);
+  background-color: var(--course-teal, #484831);
+  border: 1px solid var(--course-teal, #484831);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-details-save:hover {
-  background-color: var(--course-teal-hover, #006e75);
-  border-color: var(--course-teal-hover, #006e75);
-  box-shadow: 0 2px 8px rgba(0, 130, 138, 0.25);
+  background-color: var(--course-teal-hover, #373725);
+  border-color: var(--course-teal-hover, #373725);
+  box-shadow: 0 2px 8px rgba(72, 72, 49, 0.25);
 }
 
 /* Payment Methods List Inside */

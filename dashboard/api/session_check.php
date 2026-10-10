@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Session Check API
+ * Ocayur Doctor Portal - Session Check API
  * Returns active doctor/user session data
  */
 

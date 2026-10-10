@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Panchved Doctor Portal - Add Prescription Form Stylesheet
+   Ocayur Doctor Portal - Add Prescription Form Stylesheet
+   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
    ========================================================================== */
 
 /* Top Back Navigation */
@@ -16,13 +17,13 @@
   gap: 6px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
   text-decoration: none;
   transition: color var(--transition-fast, 0.15s ease);
 }
 
 .btn-prescription-back:hover {
-  color: var(--color-primary-hover, #006e75);
+  color: var(--color-primary-hover, #373725);
   text-decoration: underline;
 }
 
@@ -75,7 +76,7 @@
 .symptom-box-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-primary, #00828a);
+  color: var(--color-primary, #484831);
 }
 
 .btn-remove-symptom {
@@ -136,7 +137,7 @@
 .form-input-control:focus,
 .form-select-control:focus {
   outline: none;
-  border-color: var(--color-primary, #00828a);
+  border-color: var(--color-primary, #484831);
   box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
 }
 
@@ -192,7 +193,7 @@
 
 .form-textarea-control:focus {
   outline: none;
-  border-color: var(--color-primary, #00828a);
+  border-color: var(--color-primary, #484831);
   box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
 }
 
@@ -205,7 +206,7 @@
   align-self: flex-start;
   height: 40px;
   padding: 0 20px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -248,7 +249,7 @@
 }
 
 .medication-table thead tr {
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
 }
 
 .medication-table thead th {
@@ -289,7 +290,7 @@
 
 .medication-input:focus {
   outline: none;
-  border-color: var(--color-primary, #00828a);
+  border-color: var(--color-primary, #484831);
   box-shadow: 0 0 0 2px rgba(0, 130, 138, 0.12);
 }
 
@@ -309,7 +310,7 @@
 .btn-submit-prescription {
   height: 44px;
   padding: 0 32px;
-  background-color: var(--color-primary, #00828a);
+  background-color: var(--color-primary, #484831);
   color: #ffffff;
   border: none;
   border-radius: 8px;

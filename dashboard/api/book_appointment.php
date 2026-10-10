@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Book Appointment API
+ * Ocayur Doctor Portal - Book Appointment API
  * Creates a new appointment in `appointments` table based on schema.sql
  */
 

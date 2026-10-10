@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Update Appointment Status API
+ * Ocayur Doctor Portal - Update Appointment Status API
  * Updates the status of an appointment in the `appointments` table
  */
 

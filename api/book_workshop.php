@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Book Workshop & Payment API
+ * Ocayur Doctor Portal - Book Workshop & Payment API
  * Handles registration and saves booking records in MySQL
  */
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Profile API
+ * Ocayur Doctor Portal - Get Profile API
  * Fetches doctor profile information from the admin portal `doctors` table
  */
 

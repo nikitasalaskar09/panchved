@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Protocol Details API
+ * Ocayur Doctor Portal - Get Protocol Details API
  * Fetches specific protocol guidelines based on schema.sql
  */
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Add Diet Plan API
+ * Ocayur Doctor Portal - Add Diet Plan API
  * Saves patient diet recommendations and logs clinical dietary notes
  */
 

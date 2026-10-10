@@ -1,5 +1,5 @@
 -- ============================================================================
--- Panchved Complete Ayurved & Physiotherapy Rehab Center
+-- Ocayur - Ayurveda Lifestyle
 -- Comprehensive Database Schema SQL Script
 -- Database: jewrzsmy_panchved / jcwrzsmy_panchved
 -- ============================================================================
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Sample Seed Data for Users (Password: admin123)
 -- Valid bcrypt hash for 'admin123': $2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi
 INSERT INTO `users` (`id`, `username`, `full_name`, `email`, `phone_number`, `password_hash`, `role`, `status`) VALUES
-(1, 'admin', 'John Doe', 'admin@panchved.com', '9876543210', '$2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi', 'Admin', 'Active'),
+(1, 'admin', 'John Doe', 'admin@ocayur.com', '9876543210', '$2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi', 'Admin', 'Active'),
 (2, 'drnidhi', 'Dr. Nidhi Jha', 'drnidhi@gmail.com', '9876543211', '$2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi', 'Doctor', 'Active'),
-(3, 'staff', 'Reception Desk', 'staff@panchved.com', '9876543212', '$2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi', 'Staff', 'Active')
+(3, 'staff', 'Reception Desk', 'staff@ocayur.com', '9876543212', '$2y$10$d417Xs.WV8vdff3JpnWuVu42pdRs5ES09vSQFFQzhJzoCXDHsrchi', 'Staff', 'Active')
 ON DUPLICATE KEY UPDATE `full_name` = VALUES(`full_name`), `password_hash` = VALUES(`password_hash`);
 
 
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   `doctor_name` VARCHAR(150) NOT NULL DEFAULT 'Dr. Ananya Prasad',
   `doctor_specialty` VARCHAR(150) NOT NULL DEFAULT 'Ayurvedic Medicine',
   `doctor_phone` VARCHAR(50) NOT NULL DEFAULT '+91 7896543210',
-  `doctor_email` VARCHAR(150) NOT NULL DEFAULT 'panchvedsupport@gmail.com',
+  `doctor_email` VARCHAR(150) NOT NULL DEFAULT 'ocayursupport@gmail.com',
   `appointment_id` INT(11) DEFAULT NULL,
   `prescription_date` DATE NOT NULL,
   `prescription_time` VARCHAR(30) NOT NULL DEFAULT '11:20 AM',
@@ -317,8 +317,8 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
 
 -- Sample Seed Data for Prescriptions
 INSERT INTO `prescriptions` (`id`, `prescription_code`, `patient_id`, `patient_name`, `doctor_id`, `doctor_name`, `doctor_specialty`, `doctor_phone`, `doctor_email`, `appointment_id`, `prescription_date`, `prescription_time`, `medical_history`, `symptoms`, `diagnosis`, `diagnosis_duration`, `medications`, `examination_findings`, `notes`) VALUES
-(1, 'RX-001', 1, 'Rahul Sharma', 1, 'Dr. Ananya Prasad', 'Ayurvedic Medicine', '+91 7896543210', 'panchvedsupport@gmail.com', 1, '2026-09-08', '11:20 AM', 'No Known Significant Medical History', 'Constipation (Severity : Moderate)', 'Migraine', '3 months', '[{\"medication\":\"TAB MEENTOACID (TABLET)\",\"dose\":\"1 TABLET\",\"frequency\":\"1-0-1 BEFORE MEAL\",\"duration\":\"10 DAYS\",\"remarks\":\"TAKE 1 TABLET - TWICE A DAY, BEFORE BREAKFAST AND BEFORE DINNER FOR 10 DAYS\"},{\"medication\":\"CAP HERBOCALM (CAPSULE)\",\"dose\":\"1 CAPSULE\",\"frequency\":\"0-0-1 AFTER DINNER\",\"duration\":\"15 DAYS\",\"remarks\":\"TAKE WITH WARM MILK BEFORE SLEEP\"}]', 'Abdomen Feels Distended', 'Gandbush ( Cow Ghee + Triphala Powder )'),
-(2, 'RX-002', 2, 'Pooja Deshmukh', 1, 'Dr. Ananya Prasad', 'Ayurvedic Medicine', '+91 7896543210', 'panchvedsupport@gmail.com', 2, '2026-09-12', '10:15 AM', 'Hormonal imbalance history, PCOD diagnosis 2 years ago', 'Irregular cycles, Fatigue (Severity : Moderate)', 'PCOS / Hormonal Imbalance', '6 months', '[{\"medication\":\"SHATAVARI GHRUTA (SYRUP)\",\"dose\":\"2 TEASPOONS\",\"frequency\":\"1-0-1 EMPTY STOMACH\",\"duration\":\"30 DAYS\",\"remarks\":\"TAKE IN THE MORNING AND EVENING WITH WARM WATER\"},{\"medication\":\"KANCHNAR GUGGULU (TABLET)\",\"dose\":\"2 TABLETS\",\"frequency\":\"1-0-1 AFTER MEALS\",\"duration\":\"20 DAYS\",\"remarks\":\"FOR HORMONAL AND METABOLIC REGULATION\"}]', 'Mild thyroid enlargement palpated', 'Nasya with Anu Taila daily in morning; Seed cycling protocol'),
+(1, 'RX-001', 1, 'Rahul Sharma', 1, 'Dr. Ananya Prasad', 'Ayurvedic Medicine', '+91 7896543210', 'ocayursupport@gmail.com', 1, '2026-09-08', '11:20 AM', 'No Known Significant Medical History', 'Constipation (Severity : Moderate)', 'Migraine', '3 months', '[{\"medication\":\"TAB MEENTOACID (TABLET)\",\"dose\":\"1 TABLET\",\"frequency\":\"1-0-1 BEFORE MEAL\",\"duration\":\"10 DAYS\",\"remarks\":\"TAKE 1 TABLET - TWICE A DAY, BEFORE BREAKFAST AND BEFORE DINNER FOR 10 DAYS\"},{\"medication\":\"CAP HERBOCALM (CAPSULE)\",\"dose\":\"1 CAPSULE\",\"frequency\":\"0-0-1 AFTER DINNER\",\"duration\":\"15 DAYS\",\"remarks\":\"TAKE WITH WARM MILK BEFORE SLEEP\"}]', 'Abdomen Feels Distended', 'Gandbush ( Cow Ghee + Triphala Powder )'),
+(2, 'RX-002', 2, 'Pooja Deshmukh', 1, 'Dr. Ananya Prasad', 'Ayurvedic Medicine', '+91 7896543210', 'ocayursupport@gmail.com', 2, '2026-09-12', '10:15 AM', 'Hormonal imbalance history, PCOD diagnosis 2 years ago', 'Irregular cycles, Fatigue (Severity : Moderate)', 'PCOS / Hormonal Imbalance', '6 months', '[{\"medication\":\"SHATAVARI GHRUTA (SYRUP)\",\"dose\":\"2 TEASPOONS\",\"frequency\":\"1-0-1 EMPTY STOMACH\",\"duration\":\"30 DAYS\",\"remarks\":\"TAKE IN THE MORNING AND EVENING WITH WARM WATER\"},{\"medication\":\"KANCHNAR GUGGULU (TABLET)\",\"dose\":\"2 TABLETS\",\"frequency\":\"1-0-1 AFTER MEALS\",\"duration\":\"20 DAYS\",\"remarks\":\"FOR HORMONAL AND METABOLIC REGULATION\"}]', 'Mild thyroid enlargement palpated', 'Nasya with Anu Taila daily in morning; Seed cycling protocol'),
 (3, 'RX-003', 3, 'Vikram Malhotra', 2, 'Dr. Rohit Mehra', 'Orthopedic & Sports Rehab', '+91 9823456789', 'rohitmehra@gmail.com', 3, '2026-09-15', '02:30 PM', 'Lower lumbar spine stiffness, post-strenuous exercise', 'Lower back ache, Hamstring tightness (Severity : Mild)', 'Lumbar Spondylosis', '4 months', '[{\"medication\":\"TRIPHALA GUGGULU (TABLET)\",\"dose\":\"2 TABLETS\",\"frequency\":\"0-0-2 BEFORE SLEEP\",\"duration\":\"14 DAYS\",\"remarks\":\"TAKE WITH WARM WATER AT BEDTIME FOR GUT HEALTH\"}]', 'L4-L5 lumbar tenderness on flexion', 'Kottamchukkadi Taila local application + Physio core stretches')
 ON DUPLICATE KEY UPDATE `patient_name` = VALUES(`patient_name`), `medications` = VALUES(`medications`), `symptoms` = VALUES(`symptoms`), `diagnosis` = VALUES(`diagnosis`), `notes` = VALUES(`notes`);
 

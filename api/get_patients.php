@@ -1,6 +1,6 @@
 <?php
 /**
- * Panchved Doctor Portal - Get Patients API
+ * Ocayur Doctor Portal - Get Patients API
  * Provides live patient directory, multi-parameter search & filtering, and database pagination
  * Queries the MySQL `patients` table directly based on schema.sql
  */
