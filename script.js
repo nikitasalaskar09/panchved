@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedCountryCode = document.getElementById('selectedCountryCode');
   
   const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  const termsLink = document.getElementById('termsLink');
+  const privacyLink = document.getElementById('privacyLink');
   
   const loginBtn = document.getElementById('loginBtn');
   const btnText = loginBtn.querySelector('.btn-text');
@@ -154,14 +156,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. Forgot Password Handler
+  // 4. Feature Coming Soon Handlers (Forgot Password, Terms, Privacy)
   // ==========================================
+  const showFeatureComingSoon = (e) => {
+    if (e) e.preventDefault();
+    showToast('This feature will be available soon.', 'info');
+  };
+
   if (forgotPasswordLink) {
-    forgotPasswordLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast('This feature will be available soon.', 'info');
-    });
+    forgotPasswordLink.addEventListener('click', showFeatureComingSoon);
   }
+
+  if (termsLink) {
+    termsLink.addEventListener('click', showFeatureComingSoon);
+  }
+
+  if (privacyLink) {
+    privacyLink.addEventListener('click', showFeatureComingSoon);
+  }
+
+  document.querySelectorAll('.footer-link').forEach((link) => {
+    link.addEventListener('click', showFeatureComingSoon);
+  });
 
   // ==========================================
   // 6. Form Submit Handler

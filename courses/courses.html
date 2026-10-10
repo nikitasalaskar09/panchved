@@ -102,6 +102,7 @@
             <a href="../appointments/appointments.html" class="nav-link">
               <span class="nav-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </span>
@@ -520,11 +521,11 @@
               </div>
 
               <!-- Card 2: Your Details -->
-              <div class="checkout-card">
+              <div class="checkout-card" id="coursesDetailsCard">
                 <div class="checkout-card-header">
-                  <h2 class="checkout-card-title" style="margin: 0; border: none; padding: 0; min-height: auto;">Your Details</h2>
-                  <button type="button" class="btn-edit-details" onclick="handleEditDetailsCourses()" aria-label="Edit personal details">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <h2 class="checkout-card-title">Your Details</h2>
+                  <button type="button" class="btn-edit-details" id="btnEditDetailsCourses" onclick="handleEditDetailsCourses()" aria-label="Edit personal details">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M12 20h9"></path>
                       <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                     </svg>
@@ -532,11 +533,46 @@
                   </button>
                 </div>
 
-                <div class="checkout-user-info">
-                  <div class="checkout-user-name" id="coursesUserName"></div>
-                  <div class="checkout-user-meta checkout-user-email" id="coursesUserEmail"></div>
-                  <div class="checkout-user-meta checkout-user-phone" id="coursesUserPhone"></div>
+                <!-- 1. Display View (Initial State - First Image) -->
+                <div class="checkout-user-info" id="coursesUserDetailsDisplay">
+                  <div class="checkout-user-name" id="coursesUserName">Hrutik Gaonkar</div>
+                  <div class="checkout-user-meta checkout-user-email" id="coursesUserEmail">hrutikgaonkar11@gmail.com</div>
+                  <div class="checkout-user-meta checkout-user-phone" id="coursesUserPhone">9988776655</div>
                 </div>
+
+                <!-- 2. Edit Form View (Shown on clicking Edit - Second Image) -->
+                <form class="checkout-details-form hidden" id="coursesDetailsForm" onsubmit="event.preventDefault(); handleSaveDetailsCourses();">
+                  <div class="checkout-details-grid">
+                    <!-- Field 1: Name -->
+                    <div class="checkout-form-group">
+                      <label for="inputCoursesUserName" class="checkout-form-label">
+                        Name <span class="required-star">*</span>
+                      </label>
+                      <input type="text" id="inputCoursesUserName" name="userName" class="checkout-form-input" placeholder="Enter your name" value="Hrutik Gaonkar" required>
+                    </div>
+
+                    <!-- Field 2: Email -->
+                    <div class="checkout-form-group">
+                      <label for="inputCoursesUserEmail" class="checkout-form-label">
+                        Email <span class="required-star">*</span>
+                      </label>
+                      <input type="email" id="inputCoursesUserEmail" name="userEmail" class="checkout-form-input" placeholder="Enter your email" value="hrutikgaonkar11@gmail.com" required>
+                    </div>
+
+                    <!-- Field 3: Phone -->
+                    <div class="checkout-form-group">
+                      <label for="inputCoursesUserPhone" class="checkout-form-label">
+                        Phone <span class="required-star">*</span>
+                      </label>
+                      <input type="tel" id="inputCoursesUserPhone" name="userPhone" class="checkout-form-input" placeholder="Enter your phone" value="9988776655" maxlength="10" required>
+                    </div>
+                  </div>
+
+                  <div class="checkout-details-actions">
+                    <button type="button" class="btn-details-cancel" id="btnCancelDetailsCourses" onclick="handleCancelDetailsCourses()">Cancel</button>
+                    <button type="button" class="btn-details-save" id="btnSaveDetailsCourses" onclick="handleSaveDetailsCourses()">Save Details</button>
+                  </div>
+                </form>
               </div>
 
               <!-- Card 3: Payment -->
@@ -745,7 +781,7 @@
 
     function renderMyWorkshops(workshops) {
       if (!myWorkshopsGrid) return;
-      const doctorWorkshops = (workshops || []).filter(ws => !ws.attendee_type || ws.attendee_type.toLowerCase() !== 'patient');
+      const doctorWorkshops = (workshops || []).filter(ws => !ws.attendee_type || ws.attendee_type.toLowerCase() === 'doctor' || ws.attendee_type.toLowerCase() === 'both' || ws.attendee_type.toLowerCase() === 'all' || ws.attendee_type.toLowerCase() !== 'patient');
       
       if (doctorWorkshops.length === 0) {
         myWorkshopsGrid.innerHTML = `
@@ -854,7 +890,7 @@
     function renderAllWorkshops(workshops) {
       if (!allWorkshopsGrid) return;
       let html = '';
-      const doctorWorkshops = (workshops || []).filter(ws => !ws.attendee_type || ws.attendee_type.toLowerCase() !== 'patient');
+      const doctorWorkshops = (workshops || []).filter(ws => !ws.attendee_type || ws.attendee_type.toLowerCase() === 'doctor' || ws.attendee_type.toLowerCase() === 'both' || ws.attendee_type.toLowerCase() === 'all' || ws.attendee_type.toLowerCase() !== 'patient');
       doctorWorkshops.forEach(ws => {
         const feeText = ws.fee_display || `₹${ws.fee}/- (One Day Workshop)`;
         const dateText = ws.date || '3 September, Wednesday';
@@ -1016,6 +1052,12 @@
     // 5. Checkout View (Image 4)
     // =========================================================================
     function showCheckoutView() {
+      populateLoggedInUserDetailsCourses();
+      const displayWrap = document.getElementById('coursesUserDetailsDisplay');
+      const formWrap = document.getElementById('coursesDetailsForm');
+      if (formWrap) formWrap.classList.add('hidden');
+      if (displayWrap) displayWrap.classList.remove('hidden');
+
       detailView.classList.add('hidden');
       listView.classList.add('hidden');
       checkoutView.classList.remove('hidden');
@@ -1095,20 +1137,172 @@
       });
     });
 
-    // Edit details prompt
+    // Attach input restrictions for courses checkout
+    const coursesPhoneInputEl = document.getElementById('inputCoursesUserPhone');
+    if (coursesPhoneInputEl) {
+      coursesPhoneInputEl.addEventListener('input', () => {
+        coursesPhoneInputEl.value = coursesPhoneInputEl.value.replace(/\D/g, '').slice(0, 10);
+      });
+    }
+
+    // Populate user details on courses page
+    function populateLoggedInUserDetailsCourses(doctorData) {
+      let doctor = doctorData;
+      if (!doctor) {
+        try {
+          doctor = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        } catch (_) {}
+      }
+
+      const name = doctor?.full_name || doctor?.name || 'Hrutik Gaonkar';
+      const email = doctor?.email || doctor?.doctor_email || 'hrutikgaonkar11@gmail.com';
+      const phone = doctor?.phone_number || doctor?.phone || '9988776655';
+
+      const displayNameEl = document.getElementById('coursesUserName');
+      const displayEmailEl = document.getElementById('coursesUserEmail');
+      const displayPhoneEl = document.getElementById('coursesUserPhone');
+
+      const inputNameEl = document.getElementById('inputCoursesUserName');
+      const inputEmailEl = document.getElementById('inputCoursesUserEmail');
+      const inputPhoneEl = document.getElementById('inputCoursesUserPhone');
+
+      if (displayNameEl) displayNameEl.textContent = name;
+      if (displayEmailEl) displayEmailEl.textContent = email;
+      if (displayPhoneEl) displayPhoneEl.textContent = phone;
+
+      if (inputNameEl) inputNameEl.value = name;
+      if (inputEmailEl) inputEmailEl.value = email;
+      if (inputPhoneEl) inputPhoneEl.value = phone;
+    }
+
+    // Edit details (Switches to Edit Form View - Second Image)
     function handleEditDetailsCourses() {
-      const currentName = document.getElementById('coursesUserName').textContent;
-      const currentEmail = document.getElementById('coursesUserEmail').textContent;
-      const currentPhone = document.getElementById('coursesUserPhone').textContent;
+      const displayWrap = document.getElementById('coursesUserDetailsDisplay');
+      const formWrap = document.getElementById('coursesDetailsForm');
+      const displayName = document.getElementById('coursesUserName')?.textContent.trim() || '';
+      const displayEmail = document.getElementById('coursesUserEmail')?.textContent.trim() || '';
+      const displayPhone = document.getElementById('coursesUserPhone')?.textContent.trim() || '';
 
-      const newName = prompt('Enter your full name:', currentName);
-      if (newName) document.getElementById('coursesUserName').textContent = newName;
+      const inputName = document.getElementById('inputCoursesUserName');
+      const inputEmail = document.getElementById('inputCoursesUserEmail');
+      const inputPhone = document.getElementById('inputCoursesUserPhone');
 
-      const newEmail = prompt('Enter your email address:', currentEmail);
-      if (newEmail) document.getElementById('coursesUserEmail').textContent = newEmail;
+      if (inputName && displayName) inputName.value = displayName;
+      if (inputEmail && displayEmail) inputEmail.value = displayEmail;
+      if (inputPhone && displayPhone) inputPhone.value = displayPhone;
 
-      const newPhone = prompt('Enter your phone number:', currentPhone);
-      if (newPhone) document.getElementById('coursesUserPhone').textContent = newPhone;
+      if (displayWrap) displayWrap.classList.add('hidden');
+      if (formWrap) formWrap.classList.remove('hidden');
+
+      if (inputName) {
+        inputName.focus();
+        inputName.select();
+      }
+    }
+
+    // Cancel Details Handler (Restores Initial Display State - First Image)
+    function handleCancelDetailsCourses() {
+      const displayWrap = document.getElementById('coursesUserDetailsDisplay');
+      const formWrap = document.getElementById('coursesDetailsForm');
+
+      populateLoggedInUserDetailsCourses();
+
+      if (formWrap) formWrap.classList.add('hidden');
+      if (displayWrap) displayWrap.classList.remove('hidden');
+    }
+
+    // Save Details Handler (Saves & Restores Initial Display State - First Image)
+    async function handleSaveDetailsCourses() {
+      const inputName = document.getElementById('inputCoursesUserName');
+      const inputEmail = document.getElementById('inputCoursesUserEmail');
+      const inputPhone = document.getElementById('inputCoursesUserPhone');
+
+      const nameVal = inputName ? inputName.value.trim() : '';
+      const emailVal = inputEmail ? inputEmail.value.trim() : '';
+      const phoneVal = inputPhone ? inputPhone.value.trim() : '';
+
+      if (!nameVal) {
+        showToast('Please enter your name');
+        if (inputName) inputName.focus();
+        return;
+      }
+      if (!emailVal || !emailVal.includes('@')) {
+        showToast('Please enter a valid email address');
+        if (inputEmail) inputEmail.focus();
+        return;
+      }
+      if (!phoneVal || phoneVal.length < 10) {
+        showToast('Please enter a valid 10-digit phone number');
+        if (inputPhone) inputPhone.focus();
+        return;
+      }
+
+      // Update display text
+      const displayNameEl = document.getElementById('coursesUserName');
+      const displayEmailEl = document.getElementById('coursesUserEmail');
+      const displayPhoneEl = document.getElementById('coursesUserPhone');
+      if (displayNameEl) displayNameEl.textContent = nameVal;
+      if (displayEmailEl) displayEmailEl.textContent = emailVal;
+      if (displayPhoneEl) displayPhoneEl.textContent = phoneVal;
+
+      let doctorId = null;
+      let existingDoctor = {};
+      try {
+        existingDoctor = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        doctorId = existingDoctor.id || null;
+      } catch (_) {}
+
+      const updatedDoctorLocal = {
+        ...existingDoctor,
+        full_name: nameVal,
+        name: nameVal,
+        email: emailVal,
+        phone_number: phoneVal,
+        phone: phoneVal
+      };
+
+      localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
+      localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
+      if (typeof syncDoctorUI === 'function') {
+        syncDoctorUI(updatedDoctorLocal);
+      }
+
+      // Switch back to display mode
+      const displayWrap = document.getElementById('coursesUserDetailsDisplay');
+      const formWrap = document.getElementById('coursesDetailsForm');
+      if (formWrap) formWrap.classList.add('hidden');
+      if (displayWrap) displayWrap.classList.remove('hidden');
+
+      showToast('Details saved successfully!');
+
+      // Persist to backend database via update_profile.php
+      try {
+        const apiPath = (typeof window.getApiPath === 'function') ? window.getApiPath('update_profile.php') : '../api/update_profile.php';
+        const response = await fetch(apiPath, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            doctor_id: doctorId,
+            full_name: nameVal,
+            email: emailVal,
+            phone_number: phoneVal
+          })
+        });
+        const result = await response.json().catch(() => null);
+        if (result && result.success && result.doctor) {
+          const finalDoc = { ...updatedDoctorLocal, ...result.doctor };
+          localStorage.setItem('panchved_doctor', JSON.stringify(finalDoc));
+          localStorage.setItem('panchved_user', JSON.stringify(finalDoc));
+          if (typeof syncDoctorUI === 'function') {
+            syncDoctorUI(finalDoc);
+          }
+        }
+      } catch (err) {
+        console.warn('Backend profile update note:', err);
+      }
     }
 
     // Toast Functionality

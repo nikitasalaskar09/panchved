@@ -319,8 +319,66 @@
           .replace(/'/g, '&#039;');
       }
 
+      function calculateDurationFromTime(timeStr, fallbackDuration = '45 mins') {
+        if (!timeStr || typeof timeStr !== 'string') {
+          return formatDurationString(fallbackDuration);
+        }
+
+        const parts = timeStr.trim().split(/\s*(?:-|–|—|\bto\b|\btill\b)\s*/i);
+        if (parts.length >= 2) {
+          let startStr = parts[0].trim();
+          let endStr = parts[1].trim();
+
+          const ampmMatch = endStr.match(/([ap]m)/i);
+          if (!/[ap]m/i.test(startStr) && ampmMatch) {
+            startStr += ' ' + ampmMatch[1];
+          }
+
+          const parseToMinutes = (str) => {
+            if (!str) return null;
+            const match = str.match(/^(\d{1,2})(?::(\d{2}))?\s*([ap]m)?$/i);
+            if (!match) {
+              const d = new Date(`1970-01-01 ${str}`);
+              return isNaN(d.getTime()) ? null : d.getHours() * 60 + d.getMinutes();
+            }
+            let hours = parseInt(match[1], 10);
+            const minutes = match[2] ? parseInt(match[2], 10) : 0;
+            const meridiem = match[3] ? match[3].toLowerCase() : null;
+
+            if (meridiem === 'pm' && hours < 12) hours += 12;
+            if (meridiem === 'am' && hours === 12) hours = 0;
+
+            return hours * 60 + minutes;
+          };
+
+          const startMin = parseToMinutes(startStr);
+          const endMin = parseToMinutes(endStr);
+
+          if (startMin !== null && endMin !== null) {
+            let diff = endMin - startMin;
+            if (diff < 0) diff += 24 * 60; // Overnight appointment
+
+            if (diff > 0) {
+              return `${diff} mins`;
+            }
+          }
+        }
+
+        return formatDurationString(fallbackDuration);
+      }
+
+      function formatDurationString(dur) {
+        if (!dur) return '45 mins';
+        const s = String(dur).trim();
+        if (/^\d+$/.test(s)) return `${s} mins`;
+        if (/^\d+\s*min$/i.test(s)) return `${s}s`;
+        if (/^\d+\s*mins$/i.test(s)) return s;
+        return s || '45 mins';
+      }
+
       function renderUpcomingRow(item) {
         const patientLink = item.patient_id ? `../patients/patient-details.html?id=${item.patient_id}` : '#';
+        const calculatedDuration = calculateDurationFromTime(item.time, item.duration);
         return `
           <tr>
             <td class="cell-id">${escapeHtml(item.appointment_id)}</td>
@@ -332,7 +390,7 @@
             <td>${escapeHtml(item.date)}</td>
             <td>${escapeHtml(item.time)}</td>
             <td class="cell-agenda" title="${escapeHtml(item.agenda)}">${escapeHtml(item.agenda)}</td>
-            <td class="cell-duration">${escapeHtml(item.duration)}</td>
+            <td class="cell-duration">${escapeHtml(calculatedDuration)}</td>
             <td>
               <a href="${escapeHtml(item.meet_link)}" target="_blank" rel="noopener noreferrer" class="meet-link" aria-label="Join Google Meet for ${escapeHtml(item.patient_name)}">
                 meet.google...
@@ -350,6 +408,7 @@
       function renderHistoryRow(item) {
         const patientLink = item.patient_id ? `../patients/patient-details.html?id=${item.patient_id}` : '#';
         const prescriptionUrl = `add-prescription.html?patient_id=${item.patient_id || 1}&appointment_id=${encodeURIComponent(item.appointment_id || '')}`;
+        const calculatedDuration = calculateDurationFromTime(item.time, item.duration);
         return `
           <tr>
             <td class="cell-id">${escapeHtml(item.appointment_id)}</td>
@@ -361,7 +420,7 @@
             <td>${escapeHtml(item.time)}</td>
             <td>${escapeHtml(item.date)}</td>
             <td class="cell-agenda" title="${escapeHtml(item.agenda)}">${escapeHtml(item.agenda)}</td>
-            <td class="cell-duration">${escapeHtml(item.duration)}</td>
+            <td class="cell-duration">${escapeHtml(calculatedDuration)}</td>
             <td>
               <a href="${prescriptionUrl}" class="btn-add-prescription" aria-label="Add prescription for ${escapeHtml(item.patient_name)}">
                 Add Prescription

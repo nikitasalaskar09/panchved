@@ -202,12 +202,12 @@ CREATE TABLE IF NOT EXISTS `appointments` (
 
 -- Sample Seed Data for Appointments
 INSERT INTO `appointments` (`id`, `appointment_id`, `patient_id`, `patient_name`, `doctor_id`, `doctor_name`, `package_name`, `appointment_date`, `appointment_time`, `duration`, `agenda`, `prescription`, `status`) VALUES
-(1, 'ABC-001', 1, 'Rahul Mishra', 1, 'Dr. Nidhi Jha', 'Stress Management', CURDATE(), '8:00 AM', '45 min', 'Follow-up consultation for stress care protocol and sleep quality check.', 'Ashwagandha Churna 3g twice daily with warm milk, Brahmi Vati 1 tablet before bed.', 'Scheduled'),
-(2, 'ABC-002', 2, 'Pooja Deshmukh', 1, 'Dr. Nidhi Jha', 'Reset Your Hormones', CURDATE(), '9:30 AM', '45 min', 'Hormonal balance progress review and diet adherence monitoring.', 'Shatavari Ghruta 1 tsp morning empty stomach, Kanchnar Guggulu 2 tablets twice daily.', 'Scheduled'),
-(3, 'ABC-003', 3, 'Vikram Malhotra', 2, 'Dr. Rohit Mehra', 'Gut Healing Package', DATE_SUB(CURDATE(), INTERVAL 1 DAY), '11:00 AM', '45 min', 'Musculoskeletal assessment and lower back rehab physiotherapy exercise review.', 'Kottamchukkadi Taila local application followed by hot fomentation.', 'Completed'),
-(4, 'ABC-004', 4, 'Ananya Sengupta', 4, 'Dr. Ankit Verma', 'Work On Metabolism', DATE_SUB(CURDATE(), INTERVAL 2 DAY), '2:00 PM', '45 min', 'Metabolic checkup and digestive enzyme analysis.', 'Triphala Guggulu 2 tablets before bedtime with warm water.', 'Completed'),
-(5, 'ABC-005', 5, 'Suresh Iyer', 3, 'Dr. Priya Patel', 'Stresscare', DATE_SUB(CURDATE(), INTERVAL 3 DAY), '4:15 PM', '45 min', 'Panchakarma Shirodhara post-therapy evaluation.', 'Manasamitra Vatakam 1 tab at bedtime, daily Nasya with Anu Taila.', 'Completed')
-ON DUPLICATE KEY UPDATE `patient_name` = VALUES(`patient_name`), `doctor_name` = VALUES(`doctor_name`);
+(1, 'ABC-001', 1, 'Rahul Mishra', 1, 'Dr. Nidhi Jha', 'Stress Management', CURDATE(), '8:00 AM - 8:45 AM', '45 mins', 'Follow-up consultation for stress care protocol and sleep quality check.', 'Ashwagandha Churna 3g twice daily with warm milk, Brahmi Vati 1 tablet before bed.', 'Scheduled'),
+(2, 'ABC-002', 2, 'Pooja Deshmukh', 1, 'Dr. Nidhi Jha', 'Reset Your Hormones', CURDATE(), '9:30 AM - 10:15 AM', '45 mins', 'Hormonal balance progress review and diet adherence monitoring.', 'Shatavari Ghruta 1 tsp morning empty stomach, Kanchnar Guggulu 2 tablets twice daily.', 'Scheduled'),
+(3, 'ABC-003', 3, 'Vikram Malhotra', 2, 'Dr. Rohit Mehra', 'Gut Healing Package', DATE_SUB(CURDATE(), INTERVAL 1 DAY), '11:00 AM - 11:45 AM', '45 mins', 'Musculoskeletal assessment and lower back rehab physiotherapy exercise review.', 'Kottamchukkadi Taila local application followed by hot fomentation.', 'Completed'),
+(4, 'ABC-004', 4, 'Ananya Sengupta', 4, 'Dr. Ankit Verma', 'Work On Metabolism', DATE_SUB(CURDATE(), INTERVAL 2 DAY), '2:00 PM - 2:45 PM', '45 mins', 'Metabolic checkup and digestive enzyme analysis.', 'Triphala Guggulu 2 tablets before bedtime with warm water.', 'Completed'),
+(5, 'ABC-005', 5, 'Suresh Iyer', 3, 'Dr. Priya Patel', 'Stresscare', DATE_SUB(CURDATE(), INTERVAL 3 DAY), '4:15 PM - 5:00 PM', '45 mins', 'Panchakarma Shirodhara post-therapy evaluation.', 'Manasamitra Vatakam 1 tab at bedtime, daily Nasya with Anu Taila.', 'Completed')
+ON DUPLICATE KEY UPDATE `appointment_time` = VALUES(`appointment_time`), `duration` = VALUES(`duration`), `patient_name` = VALUES(`patient_name`), `doctor_name` = VALUES(`doctor_name`);
 
 
 -- ----------------------------------------------------------------------------

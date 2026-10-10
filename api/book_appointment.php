@@ -56,16 +56,55 @@ if (empty($patientName)) {
     $patientName = 'Rahul Sharma';
 }
 
+function calculateDurationFromTime($timeStr, $fallbackDuration = '45 mins') {
+    if (empty($timeStr)) {
+        return formatDurationString($fallbackDuration);
+    }
+
+    $parts = preg_split('/\s*(?:-|–|—|\bto\b|\btill\b)\s*/i', trim((string)$timeStr));
+    if (count($parts) >= 2) {
+        $startStr = trim($parts[0]);
+        $endStr = trim($parts[1]);
+
+        if (!preg_match('/[a-z]/i', $startStr) && preg_match('/([ap]m)/i', $endStr, $m)) {
+            $startStr .= ' ' . $m[1];
+        }
+
+        $startTime = strtotime($startStr);
+        $endTime = strtotime($endStr);
+
+        if ($startTime !== false && $endTime !== false) {
+            if ($endTime < $startTime) {
+                $endTime += 86400; // Overnight
+            }
+            $diffMinutes = round(($endTime - $startTime) / 60);
+            if ($diffMinutes > 0) {
+                return $diffMinutes . ' mins';
+            }
+        }
+    }
+
+    return formatDurationString($fallbackDuration);
+}
+
+function formatDurationString($dur) {
+    if (empty($dur)) return '45 mins';
+    $s = trim((string)$dur);
+    if (is_numeric($s)) return $s . ' mins';
+    if (preg_match('/^\d+\s*min$/i', $s)) return $s . 's';
+    return $s;
+}
+
 // Generate unique appointment_id code
 $randCode = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
 $appointmentCode = 'APT-' . date('ymd') . '-' . $randCode;
 
-// Calculate duration string e.g. "45 mins"
-$duration = '45 mins';
+// Calculate duration string e.g. "45 mins" based on time given
 $combinedTime = $startTime;
 if (!empty($endTime) && $endTime !== $startTime) {
     $combinedTime = $startTime . ' - ' . $endTime;
 }
+$duration = calculateDurationFromTime($combinedTime, '45 mins');
 
 // Insert into `appointments` table
 $insertQuery = "INSERT INTO `appointments` 

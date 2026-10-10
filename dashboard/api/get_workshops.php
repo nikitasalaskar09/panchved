@@ -73,7 +73,7 @@ if ($type === 'my_workshops') {
                   INNER JOIN `workshop_bookings` b ON w.id = b.workshop_id
                   WHERE (b.doctor_id = ? OR (b.doctor_email = ? AND ? != '') OR (b.doctor_phone = ? AND ? != '') OR (b.doctor_phone = ? AND ? != '')) 
                     AND b.payment_status = 'Success'
-                    AND (w.attendee_type = 'Doctor' OR w.attendee_type IS NULL OR w.attendee_type = '')
+                    AND (w.attendee_type = 'Doctor' OR w.attendee_type = 'Both' OR w.attendee_type = 'All' OR w.attendee_type IS NULL OR w.attendee_type = '')
                   ORDER BY b.id DESC";
         
         $stmt = mysqli_prepare($connection1, $query);
@@ -115,7 +115,7 @@ if ($type === 'my_workshops') {
 
 } else {
     // "all_workshops" tab: fetch all doctor workshops available for registration
-    $query = "SELECT * FROM `workshops` WHERE `status` != 'Cancelled' AND (attendee_type = 'Doctor' OR attendee_type IS NULL OR attendee_type = '') AND attendee_type != 'Patient' ORDER BY `id` ASC";
+    $query = "SELECT * FROM `workshops` WHERE `status` != 'Cancelled' AND (attendee_type = 'Doctor' OR attendee_type = 'Both' OR attendee_type = 'All' OR attendee_type IS NULL OR attendee_type = '') AND attendee_type != 'Patient' ORDER BY `id` ASC";
     $res = mysqli_query($connection1, $query);
     if ($res) {
         while ($row = mysqli_fetch_assoc($res)) {

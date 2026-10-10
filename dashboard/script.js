@@ -1,6 +1,27 @@
-/**
- * Panchved Doctor Portal - Interactive Logic
- */
+// ==========================================
+// Global Toast / Snackbar Utility
+// ==========================================
+let toastTimer = null;
+function showToast(message, type = 'info') {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+  }
+
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.className = `toast show toast-${type}`;
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3500);
+}
+window.showToast = showToast;
 
 document.addEventListener('DOMContentLoaded', () => {
   // Elements
@@ -19,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const countrySelector = document.getElementById('countrySelector');
   const countryList = document.getElementById('countryList');
   const selectedCountryCode = document.getElementById('selectedCountryCode');
+  
+  const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  const termsLink = document.getElementById('termsLink');
+  const privacyLink = document.getElementById('privacyLink');
   
   const loginBtn = document.getElementById('loginBtn');
   const btnText = loginBtn.querySelector('.btn-text');
@@ -127,18 +152,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. Toast Notification Utility
+  // 4. Feature Coming Soon Handlers (Forgot Password, Terms, Privacy)
   // ==========================================
-  let toastTimer = null;
-  function showToast(message, type = 'success') {
-    clearTimeout(toastTimer);
-    toast.textContent = message;
-    toast.className = `toast show toast-${type}`;
-    
-    toastTimer = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3500);
+  const showFeatureComingSoon = (e) => {
+    if (e) e.preventDefault();
+    showToast('This feature will be available soon.', 'info');
+  };
+
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', showFeatureComingSoon);
   }
+
+  if (termsLink) {
+    termsLink.addEventListener('click', showFeatureComingSoon);
+  }
+
+  if (privacyLink) {
+    privacyLink.addEventListener('click', showFeatureComingSoon);
+  }
+
+  document.querySelectorAll('.footer-link').forEach((link) => {
+    link.addEventListener('click', showFeatureComingSoon);
+  });
 
   // ==========================================
   // 5. Form Submit Handler

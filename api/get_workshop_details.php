@@ -46,7 +46,7 @@ if ($id > 0) {
 }
 
 if (!$workshop) {
-    $res = mysqli_query($connection1, "SELECT * FROM `workshops` WHERE `status` != 'Cancelled' AND (attendee_type = 'Doctor' OR attendee_type IS NULL OR attendee_type = '') AND attendee_type != 'Patient' ORDER BY `id` ASC LIMIT 1");
+    $res = mysqli_query($connection1, "SELECT * FROM `workshops` WHERE `status` != 'Cancelled' AND (attendee_type = 'Doctor' OR attendee_type = 'Both' OR attendee_type = 'All' OR attendee_type IS NULL OR attendee_type = '') AND attendee_type != 'Patient' ORDER BY `id` ASC LIMIT 1");
     if ($res) {
         $workshop = mysqli_fetch_assoc($res);
     }

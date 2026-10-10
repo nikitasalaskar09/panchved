@@ -6,7 +6,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const packagesGrid = document.getElementById('packagesGrid');
   const packageSearchInput = document.getElementById('packageSearchInput');
-  const filterToggleBtn = document.getElementById('filterToggleBtn');
 
   let allPackages = [];
 

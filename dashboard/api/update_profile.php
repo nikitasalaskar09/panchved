@@ -106,6 +106,48 @@ if (empty($doctorId)) {
 }
 
 if (!empty($doctorId)) {
+    // Preserve existing fields if partial update was sent (e.g. from checkout page)
+    $currStmt = mysqli_prepare($connection1, "SELECT * FROM `doctors` WHERE `id` = ? LIMIT 1");
+    if ($currStmt) {
+        mysqli_stmt_bind_param($currStmt, "i", $doctorId);
+        mysqli_stmt_execute($currStmt);
+        $currDoc = mysqli_fetch_assoc(mysqli_stmt_get_result($currStmt));
+        mysqli_stmt_close($currStmt);
+
+        if ($currDoc) {
+            if (empty($fullName) && !empty($currDoc['full_name'])) {
+                $fullName = $currDoc['full_name'];
+            }
+            if (empty($phone) && !empty($currDoc['phone_number'])) {
+                $phone = $currDoc['phone_number'];
+            }
+            if (empty($email) && !empty($currDoc['email'])) {
+                $email = $currDoc['email'];
+            }
+            if (empty($dob) && !empty($currDoc['date_of_birth'])) {
+                $formattedDOB = $currDoc['date_of_birth'];
+            }
+            if (empty($input['gender']) && !empty($currDoc['gender'])) {
+                $gender = $currDoc['gender'];
+            }
+            if (!isset($input['yoe']) && !isset($input['years_of_experience']) && isset($currDoc['years_of_experience'])) {
+                $yoe = intval($currDoc['years_of_experience']);
+            }
+            if (empty($expertise) && !empty($currDoc['expertise'])) {
+                $expertise = $currDoc['expertise'];
+            }
+            if (empty($area) && !empty($currDoc['area'])) {
+                $area = $currDoc['area'];
+            }
+            if (empty($regNo) && !empty($currDoc['registration_number'])) {
+                $regNo = $currDoc['registration_number'];
+            }
+            if (empty($hprRegNo) && !empty($currDoc['hpr_registration_number'])) {
+                $hprRegNo = $currDoc['hpr_registration_number'];
+            }
+        }
+    }
+
     // 1. Update `doctors` table
     $updateQuery = "UPDATE `doctors` SET 
         `full_name` = ?, 

@@ -212,11 +212,10 @@
                 </label>
                 <div class="profile-input-container">
                   <input 
-                    type="text" 
+                    type="date" 
                     id="profileDOB" 
                     name="dateOfBirth" 
                     class="profile-field-input" 
-                    placeholder="YYYY-MM-DD or DD/MM/YYYY"
                     required
                   >
                 </div>
@@ -234,6 +233,9 @@
                     name="phoneNumber" 
                     class="profile-field-input" 
                     placeholder="e.g. 9876543210"
+                    maxlength="10"
+                    inputmode="numeric"
+                    pattern="[0-9]{10}"
                     required
                   >
                 </div>
@@ -243,15 +245,18 @@
                 <label for="profileGender" class="profile-field-label">
                   Gender <span class="required-star" aria-hidden="true">*</span>
                 </label>
-                <div class="profile-input-container">
-                  <input 
-                    type="text" 
+                <div class="profile-input-container profile-select-container">
+                  <select 
                     id="profileGender" 
                     name="gender" 
-                    class="profile-field-input" 
-                    placeholder="Male / Female / Other"
+                    class="profile-field-input profile-field-select" 
                     required
                   >
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div>
 
@@ -363,6 +368,128 @@
               <button type="submit" class="profile-update-btn" id="profileUpdateBtn">Update</button>
             </div>
 
+          </form>
+        </section>
+
+        <!-- Change Password Section Card -->
+        <section class="profile-card change-password-card" aria-labelledby="change-password-heading">
+          <h2 id="change-password-heading" class="change-password-title">Change Password</h2>
+
+          <form id="changePasswordForm" class="profile-form change-password-form" novalidate>
+            <div class="profile-fields-grid change-password-grid">
+
+              <!-- Row 1: Old Password -->
+              <div class="profile-field-group">
+                <label for="oldPassword" class="profile-field-label">
+                  Old Password <span class="required-star" aria-hidden="true">*</span>
+                </label>
+                <div class="profile-input-container password-input-container">
+                  <input 
+                    type="password" 
+                    id="oldPassword" 
+                    name="oldPassword" 
+                    class="profile-field-input password-input" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="current-password"
+                  >
+                  <button 
+                    type="button" 
+                    class="password-toggle-btn" 
+                    data-target="oldPassword"
+                    aria-label="Toggle Old Password visibility"
+                    title="Show password"
+                  >
+                    <!-- Eye Off Icon (Default when hidden) -->
+                    <svg class="eye-off-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                    <!-- Eye On Icon (Shown when revealed) -->
+                    <svg class="eye-on-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Row 1 Right Column: Empty Spacer -->
+              <div class="profile-field-group empty-spacer" aria-hidden="true"></div>
+
+              <!-- Row 2: New Password / Confirm Password -->
+              <div class="profile-field-group">
+                <label for="newPassword" class="profile-field-label">
+                  New Password <span class="required-star" aria-hidden="true">*</span>
+                </label>
+                <div class="profile-input-container password-input-container">
+                  <input 
+                    type="password" 
+                    id="newPassword" 
+                    name="newPassword" 
+                    class="profile-field-input password-input" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="new-password"
+                  >
+                  <button 
+                    type="button" 
+                    class="password-toggle-btn" 
+                    data-target="newPassword"
+                    aria-label="Toggle New Password visibility"
+                    title="Show password"
+                  >
+                    <svg class="eye-off-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                    <svg class="eye-on-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="profile-field-group">
+                <label for="confirmPassword" class="profile-field-label">
+                  Confirm Password <span class="required-star" aria-hidden="true">*</span>
+                </label>
+                <div class="profile-input-container password-input-container">
+                  <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    class="profile-field-input password-input" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="new-password"
+                  >
+                  <button 
+                    type="button" 
+                    class="password-toggle-btn" 
+                    data-target="confirmPassword"
+                    aria-label="Toggle Confirm Password visibility"
+                    title="Show password"
+                  >
+                    <svg class="eye-off-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                    <svg class="eye-on-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Update Password Button -->
+            <div class="profile-form-actions">
+              <button type="submit" class="profile-update-btn" id="updatePasswordBtn">Update Password</button>
+            </div>
           </form>
         </section>
 

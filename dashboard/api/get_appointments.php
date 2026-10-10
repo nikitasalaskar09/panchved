@@ -148,6 +148,45 @@ if ($stmtData) {
 
 $appointments = [];
 
+function calculateDurationFromTime($timeStr, $fallbackDuration = '45 mins') {
+    if (empty($timeStr)) {
+        return formatDurationString($fallbackDuration);
+    }
+
+    $parts = preg_split('/\s*(?:-|–|—|\bto\b|\btill\b)\s*/i', trim((string)$timeStr));
+    if (count($parts) >= 2) {
+        $startStr = trim($parts[0]);
+        $endStr = trim($parts[1]);
+
+        if (!preg_match('/[a-z]/i', $startStr) && preg_match('/([ap]m)/i', $endStr, $m)) {
+            $startStr .= ' ' . $m[1];
+        }
+
+        $startTime = strtotime($startStr);
+        $endTime = strtotime($endStr);
+
+        if ($startTime !== false && $endTime !== false) {
+            if ($endTime < $startTime) {
+                $endTime += 86400; // Overnight
+            }
+            $diffMinutes = round(($endTime - $startTime) / 60);
+            if ($diffMinutes > 0) {
+                return $diffMinutes . ' mins';
+            }
+        }
+    }
+
+    return formatDurationString($fallbackDuration);
+}
+
+function formatDurationString($dur) {
+    if (empty($dur)) return '45 mins';
+    $s = trim((string)$dur);
+    if (is_numeric($s)) return $s . ' mins';
+    if (preg_match('/^\d+\s*min$/i', $s)) return $s . 's';
+    return $s;
+}
+
 if ($resData) {
     while ($row = mysqli_fetch_assoc($resData)) {
         $rawDate = $row['appointment_date'] ?? '';
@@ -156,10 +195,8 @@ if ($resData) {
             $formattedDate = date('j M Y', strtotime($rawDate));
         }
 
-        $duration = $row['duration'] ?: '45 mins';
-        if (!str_ends_with($duration, 's') && str_ends_with($duration, 'min')) {
-            $duration .= 's';
-        }
+        $timeStr = $row['appointment_time'] ?: '8:00 AM - 8:45 AM';
+        $duration = calculateDurationFromTime($timeStr, $row['duration'] ?: '45 mins');
 
         $agenda = $row['agenda'] ?: 'General Consultation & Review';
         $status = ucfirst(strtolower($row['status'] ?: 'Scheduled'));
@@ -173,7 +210,7 @@ if ($resData) {
             'package_name' => $row['package_name'] ?: 'Stresscare',
             'date_raw' => $rawDate,
             'date' => $formattedDate,
-            'time' => $row['appointment_time'] ?: '3:00 PM',
+            'time' => $timeStr,
             'duration' => $duration,
             'agenda' => $agenda,
             'status' => $status,

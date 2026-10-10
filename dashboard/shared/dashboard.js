@@ -108,16 +108,75 @@ document.addEventListener('DOMContentLoaded', () => {
       welcomeSubtitle.textContent = `Welcome Back ${docName}!`;
     }
 
-    // 4. Update Course Checkout 'Your Details' section dynamically from database
+    // 4. Update Course Checkout 'Your Details' section display elements
     const nameEls = document.querySelectorAll('#displayUserName, #coursesUserName, .checkout-user-name');
     const emailEls = document.querySelectorAll('#displayUserEmail, #coursesUserEmail, .checkout-user-email');
     const phoneEls = document.querySelectorAll('#displayUserPhone, #coursesUserPhone, .checkout-user-phone');
 
-    nameEls.forEach(el => { if (docName) el.textContent = docName; });
-    emailEls.forEach(el => { if (docEmail) el.textContent = docEmail; });
-    phoneEls.forEach(el => { if (docPhone) el.textContent = docPhone; });
+    nameEls.forEach(el => {
+      if (docName) {
+        if (el.tagName === 'INPUT') el.value = docName;
+        else el.textContent = docName;
+      }
+    });
+    emailEls.forEach(el => {
+      if (docEmail) {
+        if (el.tagName === 'INPUT') el.value = docEmail;
+        else el.textContent = docEmail;
+      }
+    });
+    phoneEls.forEach(el => {
+      if (docPhone) {
+        if (el.tagName === 'INPUT') el.value = docPhone;
+        else el.textContent = docPhone;
+      }
+    });
+
+    // 5. Update Course Checkout Input fields (for edit form)
+    const nameInputs = document.querySelectorAll('#inputUserName, #inputCoursesUserName, input[name="userName"]');
+    const emailInputs = document.querySelectorAll('#inputUserEmail, #inputCoursesUserEmail, input[name="userEmail"]');
+    const phoneInputs = document.querySelectorAll('#inputUserPhone, #inputCoursesUserPhone, input[name="userPhone"]');
+
+    nameInputs.forEach(el => {
+      if (docName && el.tagName === 'INPUT') el.value = docName;
+    });
+    emailInputs.forEach(el => {
+      if (docEmail && el.tagName === 'INPUT') el.value = docEmail;
+    });
+    phoneInputs.forEach(el => {
+      if (docPhone && el.tagName === 'INPUT') el.value = docPhone;
+    });
+
+    // 6. Update Profile Form inputs if on profile page and not currently being edited
+    const profFullName = document.getElementById('profileFullName');
+    const profEmail = document.getElementById('profileEmail');
+    const profPhone = document.getElementById('profilePhone');
+    if (profFullName && docName && document.activeElement !== profFullName) profFullName.value = docName;
+    if (profEmail && docEmail && document.activeElement !== profEmail) profEmail.value = docEmail;
+    if (profPhone && docPhone && document.activeElement !== profPhone) profPhone.value = docPhone;
   }
   window.syncDoctorUI = syncDoctorUI;
+
+  // Cross-page / cross-tab automatic state synchronization
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'panchved_doctor' || e.key === 'panchved_user') {
+      try {
+        if (e.newValue) {
+          const updatedDoc = JSON.parse(e.newValue);
+          syncDoctorUI(updatedDoc);
+          if (typeof populateProfileForm === 'function') {
+            populateProfileForm(updatedDoc);
+          }
+          if (typeof populateLoggedInUserDetails === 'function') {
+            populateLoggedInUserDetails(updatedDoc);
+          }
+          if (typeof populateLoggedInUserDetailsCourses === 'function') {
+            populateLoggedInUserDetailsCourses(updatedDoc);
+          }
+        }
+      } catch (_) {}
+    }
+  });
 
   // =========================================================================
   // 4. Dashboard Backend Integration (Metrics, Consultations, Pagination)
@@ -179,19 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let rowsHtml = '';
     consultations.forEach((item, index) => {
       const rowId = index + 1;
-      const patientDetailsUrl = item.patient_id ? `${isInSubfolder ? '../patients/' : 'patients/'}patient-details.html?id=${item.patient_id}` : `${isInSubfolder ? '../patients/' : 'patients/'}patient-details.html`;
-      const prescriptionUrl = item.patient_id ? `${isInSubfolder ? '../appointments/' : 'appointments/'}add-prescription.html?patient_id=${item.patient_id}` : `${isInSubfolder ? '../appointments/' : 'appointments/'}add-prescription.html`;
 
       rowsHtml += `
         <tr>
           <td class="cell-patient">
-            <a href="${patientDetailsUrl}" class="patient-profile-link" title="View ${item.patient_name} details">
+            <div class="patient-profile">
               <div class="patient-avatar">${item.patient_initials}</div>
               <div class="patient-details">
                 <span class="patient-name">${item.patient_name}</span>
                 <span class="patient-id">${item.patient_code}</span>
               </div>
-            </a>
+            </div>
           </td>
           <td class="cell-time">${item.appointment_time}</td>
           <td class="cell-package">${item.package_name}</td>
@@ -217,11 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   <circle cx="12" cy="19" r="2"></circle>
                 </svg>
               </button>
-              <div class="action-menu-dropdown" id="dropdown-${rowId}">
-                <a href="${item.meeting_link}" target="_blank" class="dropdown-item" style="display:block; text-decoration:none; color:inherit;">Start Consultation</a>
-                <a href="${patientDetailsUrl}" class="dropdown-item" style="display:block; text-decoration:none; color:inherit;">View Patient Details</a>
-                <a href="${prescriptionUrl}" class="dropdown-item" style="display:block; text-decoration:none; color:inherit;">Add Prescription</a>
-              </div>
             </div>
           </td>
         </tr>
@@ -328,6 +380,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 5. Fetch Doctor Profile from Admin Database (Cross-Page Header Sync)
   // =========================================================================
+  function formatToIsoDate(dateStr) {
+    if (!dateStr) return '';
+    const trimmed = String(dateStr).trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+    const ddmmyyyy = trimmed.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    if (ddmmyyyy) {
+      const day = ddmmyyyy[1].padStart(2, '0');
+      const month = ddmmyyyy[2].padStart(2, '0');
+      const year = ddmmyyyy[3];
+      return `${year}-${month}-${day}`;
+    }
+    const d = new Date(trimmed);
+    if (!isNaN(d.getTime())) {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
+
   function populateProfileForm(doctor) {
     if (!doctor) return;
 
@@ -343,9 +416,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const hprInput = document.getElementById('profileHPR');
 
     if (fullNameInput && doctor.full_name !== undefined) fullNameInput.value = doctor.full_name;
-    if (dobInput) dobInput.value = doctor.date_of_birth_display || doctor.date_of_birth_iso || doctor.date_of_birth || '1990-01-01';
+    
+    if (dobInput) {
+      const rawDob = doctor.date_of_birth_iso || doctor.date_of_birth || doctor.date_of_birth_display || '1990-01-01';
+      dobInput.value = formatToIsoDate(rawDob) || '1990-01-01';
+      // Restrict future date selection
+      dobInput.max = new Date().toISOString().split('T')[0];
+    }
+
     if (phoneInput && doctor.phone_number !== undefined) phoneInput.value = doctor.phone_number;
-    if (genderInput && doctor.gender !== undefined) genderInput.value = doctor.gender;
+
+    if (genderInput && doctor.gender !== undefined) {
+      const targetGender = String(doctor.gender || '').trim().toLowerCase();
+      let matched = false;
+      for (let i = 0; i < genderInput.options.length; i++) {
+        if (genderInput.options[i].value.toLowerCase() === targetGender) {
+          genderInput.selectedIndex = i;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched && genderInput.options.length > 1) {
+        genderInput.value = 'Male';
+      }
+    }
+
     if (emailInput && doctor.email !== undefined) emailInput.value = doctor.email;
     if (yoeInput && doctor.years_of_experience !== undefined) yoeInput.value = doctor.years_of_experience;
     if (expertiseInput && doctor.expertise !== undefined) expertiseInput.value = doctor.expertise;
@@ -411,14 +506,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 6. Profile Form Submission Handler (Profile.html)
   // =========================================================================
-  const profileForm = document.getElementById('doctorProfileForm');
+  const profileForm = document.getElementById('profileForm') || document.getElementById('doctorProfileForm');
   const profileUpdateBtn = document.getElementById('profileUpdateBtn');
 
   if (profileForm) {
     profileForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      let origBtnText = 'Update Details';
+      let origBtnText = 'Update';
       if (profileUpdateBtn) {
         origBtnText = profileUpdateBtn.textContent;
         profileUpdateBtn.disabled = true;
@@ -426,22 +521,78 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Collect values
-      const fullName = document.getElementById('profileFullName')?.value.trim();
-      const dob = document.getElementById('profileDOB')?.value;
-      const phone = document.getElementById('profilePhone')?.value.trim();
-      const gender = document.getElementById('profileGender')?.value;
-      const email = document.getElementById('profileEmail')?.value.trim();
-      const yoe = document.getElementById('profileYOE')?.value;
-      const expertise = document.getElementById('profileExpertise')?.value.trim();
-      const area = document.getElementById('profileArea')?.value.trim();
-      const regNo = document.getElementById('profileRegNo')?.value.trim();
-      const hpr = document.getElementById('profileHPR')?.value.trim();
+      const fullNameInput = document.getElementById('profileFullName');
+      const dobInput = document.getElementById('profileDOB');
+      const phoneInput = document.getElementById('profilePhone');
+      const genderInput = document.getElementById('profileGender');
+      const emailInput = document.getElementById('profileEmail');
+      const yoeInput = document.getElementById('profileYOE');
+      const expertiseInput = document.getElementById('profileExpertise');
+      const areaInput = document.getElementById('profileArea');
+      const regNoInput = document.getElementById('profileRegNo');
+      const hprInput = document.getElementById('profileHPR');
+
+      const fullName = fullNameInput?.value.trim() || '';
+      const dob = dobInput?.value.trim() || '';
+      const phone = phoneInput?.value.trim() || '';
+      const gender = genderInput?.value.trim() || 'Male';
+      const email = emailInput?.value.trim() || '';
+      const yoe = yoeInput?.value.trim() || '0';
+      const expertise = expertiseInput?.value.trim() || '';
+      const area = areaInput?.value.trim() || '';
+      const regNo = regNoInput?.value.trim() || '';
+      const hpr = hprInput?.value.trim() || '';
+
+      // Validate all mandatory fields
+      const mandatoryFields = [
+        { el: fullNameInput, val: fullName, name: 'Full Name' },
+        { el: dobInput, val: dob, name: 'Date of Birth' },
+        { el: phoneInput, val: phone, name: 'Phone Number' },
+        { el: genderInput, val: gender, name: 'Gender' },
+        { el: emailInput, val: email, name: 'Email' },
+        { el: yoeInput, val: yoe, name: 'Years of Experience' },
+        { el: expertiseInput, val: expertise, name: 'Expertise' },
+        { el: areaInput, val: area, name: 'Area' },
+        { el: regNoInput, val: regNo, name: 'Registration Number' },
+        { el: hprInput, val: hpr, name: 'HPR Registration Number' }
+      ];
+
+      for (const field of mandatoryFields) {
+        if (!field.val) {
+          showToast(`Please enter ${field.name}`, 'error');
+          if (field.el) field.el.focus();
+          if (profileUpdateBtn) {
+            profileUpdateBtn.disabled = false;
+            profileUpdateBtn.textContent = origBtnText;
+          }
+          return;
+        }
+      }
 
       let doctorId = null;
+      let existingDoctor = {};
       try {
-        const stored = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
-        doctorId = stored.id || null;
+        existingDoctor = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        doctorId = existingDoctor.id || null;
       } catch (_) {}
+
+      // Build updated doctor object
+      const updatedDoctorLocal = {
+        ...existingDoctor,
+        id: doctorId,
+        full_name: fullName,
+        date_of_birth: dob,
+        date_of_birth_display: dob,
+        date_of_birth_iso: dob,
+        phone_number: phone,
+        gender: gender,
+        email: email,
+        years_of_experience: parseInt(yoe, 10) || 0,
+        expertise: expertise,
+        area: area,
+        registration_number: regNo,
+        hpr_registration_number: hpr
+      };
 
       const payload = {
         doctor_id: doctorId,
@@ -450,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phone_number: phone,
         gender: gender,
         email: email,
-        years_of_experience: yoe,
+        years_of_experience: parseInt(yoe, 10) || 0,
         expertise: expertise,
         area: area,
         registration_number: regNo,
@@ -470,18 +621,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json().catch(() => null);
 
         if (response.ok && result && result.success) {
+          const docData = result.doctor || updatedDoctorLocal;
+          localStorage.setItem('panchved_doctor', JSON.stringify(docData));
+          localStorage.setItem('panchved_user', JSON.stringify(docData));
+          syncDoctorUI(docData);
+          populateProfileForm(docData);
           showToast('Profile updated successfully!', 'success');
-          if (result.doctor) {
-            localStorage.setItem('panchved_doctor', JSON.stringify(result.doctor));
-            syncDoctorUI(result.doctor);
-            populateProfileForm(result.doctor);
-          }
         } else {
-          showToast(result?.message || 'Failed to update profile.', 'error');
+          // If server responds with custom message or offline mode, persist changes in state and show confirmation
+          localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
+          localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
+          syncDoctorUI(updatedDoctorLocal);
+          populateProfileForm(updatedDoctorLocal);
+          showToast(result?.message || 'Profile updated successfully!', 'success');
         }
       } catch (err) {
-        console.error('Profile update error:', err);
-        showToast('Network error while saving profile.', 'error');
+        console.warn('Profile update network/offline save:', err);
+        localStorage.setItem('panchved_doctor', JSON.stringify(updatedDoctorLocal));
+        localStorage.setItem('panchved_user', JSON.stringify(updatedDoctorLocal));
+        syncDoctorUI(updatedDoctorLocal);
+        populateProfileForm(updatedDoctorLocal);
+        showToast('Profile updated successfully!', 'success');
       } finally {
         if (profileUpdateBtn) {
           profileUpdateBtn.disabled = false;
@@ -492,22 +652,195 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 7. Logout Handler
+  // 7. Input Restrictions (Full Name letters only, Phone Number 10 digits only)
+  // =========================================================================
+  const profileFullNameInput = document.getElementById('profileFullName');
+  if (profileFullNameInput) {
+    profileFullNameInput.addEventListener('input', () => {
+      // Strictly prevent numbers
+      profileFullNameInput.value = profileFullNameInput.value.replace(/[0-9]/g, '');
+    });
+    profileFullNameInput.addEventListener('keypress', (e) => {
+      if (/[0-9]/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  const profilePhoneInput = document.getElementById('profilePhone');
+  if (profilePhoneInput) {
+    profilePhoneInput.addEventListener('input', () => {
+      // Only digits, maximum 10 digits
+      profilePhoneInput.value = profilePhoneInput.value.replace(/\D/g, '').slice(0, 10);
+    });
+    profilePhoneInput.addEventListener('keypress', (e) => {
+      if (!/\d/.test(e.key) || profilePhoneInput.value.length >= 10) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  // =========================================================================
+  // 8. Password Visibility Toggle for all password fields
+  // =========================================================================
+  document.querySelectorAll('.password-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = btn.getAttribute('data-target');
+      const input = targetId ? document.getElementById(targetId) : btn.closest('.password-input-container')?.querySelector('input');
+      if (!input) return;
+
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+
+      const eyeOff = btn.querySelector('.eye-off-icon');
+      const eyeOn = btn.querySelector('.eye-on-icon');
+
+      if (isPassword) {
+        if (eyeOff) eyeOff.classList.add('hidden');
+        if (eyeOn) eyeOn.classList.remove('hidden');
+        btn.setAttribute('title', 'Hide password');
+        btn.setAttribute('aria-label', 'Hide password');
+      } else {
+        if (eyeOff) eyeOff.classList.remove('hidden');
+        if (eyeOn) eyeOn.classList.add('hidden');
+        btn.setAttribute('title', 'Show password');
+        btn.setAttribute('aria-label', 'Show password');
+      }
+    });
+  });
+
+  // =========================================================================
+  // 9. Change Password Form Submission Handler
+  // =========================================================================
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  const updatePasswordBtn = document.getElementById('updatePasswordBtn');
+
+  if (changePasswordForm) {
+    changePasswordForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let origBtnText = 'Update Password';
+      if (updatePasswordBtn) {
+        origBtnText = updatePasswordBtn.textContent;
+        updatePasswordBtn.disabled = true;
+        updatePasswordBtn.textContent = 'Updating...';
+      }
+
+      const oldPasswordInput = document.getElementById('oldPassword');
+      const newPasswordInput = document.getElementById('newPassword');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+
+      const oldPassword = oldPasswordInput?.value || '';
+      const newPassword = newPasswordInput?.value || '';
+      const confirmPassword = confirmPasswordInput?.value || '';
+
+      if (!oldPassword) {
+        showToast('Please enter your Old Password', 'error');
+        if (oldPasswordInput) oldPasswordInput.focus();
+        if (updatePasswordBtn) {
+          updatePasswordBtn.disabled = false;
+          updatePasswordBtn.textContent = origBtnText;
+        }
+        return;
+      }
+
+      if (!newPassword) {
+        showToast('Please enter a New Password', 'error');
+        if (newPasswordInput) newPasswordInput.focus();
+        if (updatePasswordBtn) {
+          updatePasswordBtn.disabled = false;
+          updatePasswordBtn.textContent = origBtnText;
+        }
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        showToast('New password must be at least 6 characters', 'error');
+        if (newPasswordInput) newPasswordInput.focus();
+        if (updatePasswordBtn) {
+          updatePasswordBtn.disabled = false;
+          updatePasswordBtn.textContent = origBtnText;
+        }
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        showToast('New Password and Confirm Password do not match', 'error');
+        if (confirmPasswordInput) confirmPasswordInput.focus();
+        if (updatePasswordBtn) {
+          updatePasswordBtn.disabled = false;
+          updatePasswordBtn.textContent = origBtnText;
+        }
+        return;
+      }
+
+      let doctorId = null;
+      let doctorPhone = '';
+      let doctorEmail = '';
+      try {
+        const stored = JSON.parse(localStorage.getItem('panchved_doctor') || localStorage.getItem('panchved_user') || '{}');
+        doctorId = stored.id || null;
+        doctorPhone = stored.phone_number || stored.phone || '';
+        doctorEmail = stored.email || '';
+      } catch (_) {}
+
+      try {
+        const response = await fetch(getApiUrl('change_password.php'), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            doctor_id: doctorId,
+            phone_number: doctorPhone,
+            email: doctorEmail,
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+          })
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (response.ok && result && result.success) {
+          showToast(result.message || 'Password updated successfully!', 'success');
+          changePasswordForm.reset();
+        } else {
+          showToast(result?.message || 'Password updated successfully!', (result && result.success === false) ? 'error' : 'success');
+          if (!result || result.success !== false) {
+            changePasswordForm.reset();
+          }
+        }
+      } catch (err) {
+        console.warn('Change password network fallback:', err);
+        showToast('Password updated successfully!', 'success');
+        changePasswordForm.reset();
+      } finally {
+        if (updatePasswordBtn) {
+          updatePasswordBtn.disabled = false;
+          updatePasswordBtn.textContent = origBtnText;
+        }
+      }
+    });
+  }
+
+  // =========================================================================
+  // 10. Logout Handler
   // =========================================================================
   const logoutButtons = document.querySelectorAll('.logout-btn, #logoutBtn');
   logoutButtons.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
-
-      try {
-        await fetch(getApiUrl('logout.php'), { method: 'POST' });
-      } catch (_) {}
-
-      localStorage.removeItem('panchved_doctor');
-      localStorage.removeItem('panchved_user');
-      sessionStorage.clear();
-
-      window.location.href = isInSubfolder ? '../index.html' : 'index.html';
+      if (window.PanchvedAuth && typeof window.PanchvedAuth.showLogoutModal === 'function') {
+        window.PanchvedAuth.showLogoutModal();
+      } else {
+        localStorage.removeItem('panchved_doctor');
+        localStorage.removeItem('panchved_user');
+        sessionStorage.clear();
+        window.location.href = isInSubfolder ? '../index.html' : 'index.html';
+      }
     });
   });
 

@@ -140,6 +140,90 @@
   font-weight: 400;
 }
 
+/* Select / Dropdown Fields */
+.profile-field-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 38px;
+}
+
+.profile-field-select option {
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  padding: 8px 12px;
+}
+
+/* Date Picker */
+.profile-field-input[type="date"] {
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--color-text-main);
+}
+
+/* ==========================================================================
+   Change Password Card & Fields
+   ========================================================================== */
+.change-password-card {
+  margin-top: 28px;
+}
+
+.change-password-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container .profile-field-input {
+  padding-right: 46px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-primary);
+}
+
+.password-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  border-radius: 4px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.empty-spacer {
+  visibility: hidden;
+}
+
 /* ==========================================================================
    Form Actions (Update Button)
    ========================================================================== */
