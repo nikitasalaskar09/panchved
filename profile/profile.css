@@ -68,7 +68,7 @@
 }
 
 .profile-avatar-circle:hover {
-  box-shadow: 0 4px 14px rgba(0, 130, 138, 0.25);
+  box-shadow: 0 4px 14px rgba(114, 63, 30, 0.25);
   transform: scale(1.04);
 }
 
@@ -120,7 +120,7 @@
 
 .profile-input-container:focus-within {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.15);
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.15);
 }
 
 /* Input Fields */
@@ -248,13 +248,13 @@
   font-weight: 700;
   letter-spacing: 0.2px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 130, 138, 0.2);
+  box-shadow: 0 2px 4px rgba(114, 63, 30, 0.2);
   transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .profile-update-btn:hover {
   background-color: var(--color-primary-hover);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.3);
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.3);
 }
 
 .profile-update-btn:active {
@@ -263,7 +263,7 @@
 }
 
 .profile-update-btn:focus-visible {
-  outline: 3px solid rgba(0, 130, 138, 0.25);
+  outline: 3px solid rgba(114, 63, 30, 0.25);
   outline-offset: 2px;
 }
 

@@ -17,13 +17,13 @@
   gap: 6px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-primary, #484831);
+  color: var(--color-primary, #723F1E);
   text-decoration: none;
   transition: color var(--transition-fast, 0.15s ease);
 }
 
 .btn-prescription-back:hover {
-  color: var(--color-primary-hover, #373725);
+  color: var(--color-primary-hover, #5D3318);
   text-decoration: underline;
 }
 
@@ -137,12 +137,12 @@
 .form-input-control:focus,
 .form-select-control:focus {
   outline: none;
-  border-color: var(--color-primary, #484831);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
+  border-color: var(--color-primary, #723F1E);
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.18);
 }
 
 .form-input-control::placeholder {
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--color-text-muted, #8E877B);
   font-size: 0.875rem;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .select-wrapper .form-select-control:valid {
-  color: var(--color-text-main, #0f172a);
+  color: var(--color-text-main, #25231F);
 }
 
 .select-icon {
@@ -182,23 +182,23 @@
   min-height: 64px;
   padding: 12px 14px;
   background-color: #ffffff;
-  border: 1px solid var(--color-border-card, #e2e8f0);
+  border: 1px solid var(--color-border-card, #ECE5D9);
   border-radius: 8px;
   font-family: inherit;
   font-size: 0.875rem;
-  color: var(--color-text-main, #0f172a);
+  color: var(--color-text-main, #25231F);
   resize: vertical;
   transition: border-color var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
 }
 
 .form-textarea-control:focus {
   outline: none;
-  border-color: var(--color-primary, #484831);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.12);
+  border-color: var(--color-primary, #723F1E);
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.18);
 }
 
 .form-textarea-control::placeholder {
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--color-text-muted, #8E877B);
 }
 
 /* Inline Action Buttons (Add Symptom, Add Medication) */
@@ -206,7 +206,7 @@
   align-self: flex-start;
   height: 40px;
   padding: 0 20px;
-  background-color: var(--color-primary, #484831);
+  background-color: var(--color-primary, #723F1E);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -218,11 +218,12 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.2);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease);
 }
 
 .btn-form-action-teal:hover {
-  background-color: var(--color-primary-hover, #006e75);
+  background-color: var(--color-primary-hover, #5D3318);
   transform: translateY(-1px);
 }
 
@@ -239,7 +240,7 @@
   -webkit-overflow-scrolling: touch;
   margin-bottom: 16px;
   border-radius: 8px;
-  border: 1px solid var(--color-border-card, #e2e8f0);
+  border: 1px solid var(--color-border-card, #ECE5D9);
 }
 
 .medication-table {
@@ -249,7 +250,7 @@
 }
 
 .medication-table thead tr {
-  background-color: var(--color-primary, #484831);
+  background-color: var(--color-primary, #723F1E);
 }
 
 .medication-table thead th {
@@ -263,7 +264,7 @@
 
 .medication-table tbody tr {
   background-color: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #F5EFE5;
 }
 
 .medication-table tbody tr:last-child {
@@ -280,22 +281,22 @@
   height: 38px;
   padding: 0 12px;
   background-color: #ffffff;
-  border: 1px solid var(--color-border-card, #e2e8f0);
+  border: 1px solid var(--color-border-card, #ECE5D9);
   border-radius: 6px;
   font-family: inherit;
   font-size: 0.8125rem;
-  color: var(--color-text-main, #0f172a);
+  color: var(--color-text-main, #25231F);
   transition: border-color 0.15s ease;
 }
 
 .medication-input:focus {
   outline: none;
-  border-color: var(--color-primary, #484831);
-  box-shadow: 0 0 0 2px rgba(0, 130, 138, 0.12);
+  border-color: var(--color-primary, #723F1E);
+  box-shadow: 0 0 0 2px rgba(114, 63, 30, 0.18);
 }
 
 .medication-input::placeholder {
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--color-text-muted, #8E877B);
   font-size: 0.8125rem;
 }
 
@@ -310,7 +311,7 @@
 .btn-submit-prescription {
   height: 44px;
   padding: 0 32px;
-  background-color: var(--color-primary, #484831);
+  background-color: var(--color-primary, #723F1E);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -321,13 +322,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 130, 138, 0.25);
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
 }
 
 .btn-submit-prescription:hover {
-  background-color: var(--color-primary-hover, #006e75);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.35);
+  background-color: var(--color-primary-hover, #5D3318);
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.35);
   transform: translateY(-1px);
 }
 

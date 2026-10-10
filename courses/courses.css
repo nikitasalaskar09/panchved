@@ -6,14 +6,14 @@
 /* Design Tokens specific to Courses */
 :root {
   --course-btn-magenta: #723F1E;
-  --course-btn-magenta-hover: #5B3218;
-  --course-btn-magenta-active: #472611;
-  --course-teal: #484831;
-  --course-teal-hover: #373725;
-  --course-teal-active: #28281B;
-  --course-teal-light: rgba(72, 72, 49, 0.08);
-  --course-teal-soft: #FFF7EC;
-  --course-card-border: #ECE3D2;
+  --course-btn-magenta-hover: #5D3318;
+  --course-btn-magenta-active: #4A2813;
+  --course-teal: #723F1E;
+  --course-teal-hover: #5D3318;
+  --course-teal-active: #4A2813;
+  --course-teal-light: rgba(114, 63, 30, 0.08);
+  --course-teal-soft: #FBF2EB;
+  --course-card-border: #ECE5D9;
   --course-text-dark: #2B2B1E;
   --course-text-body: #484831;
   --course-text-muted: #5C5A48;
@@ -166,7 +166,7 @@
 
 .workshop-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px -4px rgba(0, 130, 138, 0.08), 0 4px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 20px -4px rgba(114, 63, 30, 0.12), 0 4px 10px rgba(0, 0, 0, 0.03);
   border-color: #cbd5e1;
 }
 
@@ -346,7 +346,7 @@
 .btn-back-link:hover {
   background-color: var(--course-teal-light);
   color: var(--course-teal-hover);
-  border-color: rgba(0, 130, 138, 0.2);
+  border-color: rgba(114, 63, 30, 0.2);
 }
 
 .btn-back-link svg {
@@ -457,12 +457,12 @@
   min-width: 180px;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 130, 138, 0.15);
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.15);
 }
 
 .course-btn-register:hover {
   background-color: var(--course-teal-hover);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.25);
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.25);
   transform: translateY(-1px);
 }
 
@@ -511,7 +511,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1.5px solid rgba(0, 130, 138, 0.2);
+  border: 1.5px solid rgba(114, 63, 30, 0.2);
 }
 
 .speaker-info-col {
@@ -735,8 +735,8 @@
 }
 
 .checkout-form-input:focus {
-  border-color: var(--course-teal, #484831);
-  box-shadow: 0 0 0 3px rgba(0, 130, 138, 0.15);
+  border-color: var(--course-teal, #723F1E);
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.15);
 }
 
 .checkout-details-actions {
@@ -883,12 +883,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 130, 138, 0.15);
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.15);
 }
 
 .btn-confirm-payment:hover {
   background-color: var(--course-teal-hover);
-  box-shadow: 0 4px 12px rgba(0, 130, 138, 0.25);
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.25);
   transform: translateY(-1px);
 }
 
@@ -1009,12 +1009,12 @@
   cursor: pointer;
   min-width: 180px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 130, 138, 0.2);
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.2);
 }
 
 .booking-modal-btn-continue:hover {
   background-color: var(--course-teal-hover);
-  box-shadow: 0 4px 14px rgba(0, 130, 138, 0.3);
+  box-shadow: 0 4px 14px rgba(114, 63, 30, 0.3);
   transform: translateY(-1px);
 }
 

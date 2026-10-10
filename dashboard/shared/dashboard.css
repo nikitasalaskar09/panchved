@@ -1,57 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /* ==========================================================================
    Ocayur Doctor Portal - Dashboard Stylesheet (Fully Responsive)
-   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
+   Theme: Ocayur Ayurveda Lifestyle (Warm Terracotta & Deep Olive)
    ========================================================================== */
 
 /* Design Tokens & Custom Properties */
 :root {
-  --font-family-base: 'Proxima Nova Alt', 'Proxima Nova', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-family-base: 'Outfit', 'Plus Jakarta Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 
-  /* Official Brand Colors - Ocayur Ayurveda Lifestyle (@studionori.co) */
-  --brand-primary: #484831;          /* Official Deep Olive Green */
-  --brand-primary-hover: #373725;    /* Deeper Olive */
-  --brand-primary-active: #28281B;   /* Darkest Olive */
-  --brand-primary-light: rgba(72, 72, 49, 0.08);
-  --brand-primary-focus-ring: rgba(72, 72, 49, 0.22);
+  /* ========================================================
+     Ocayur Brand Design System (Ayurveda Lifestyle)
+     Brand Palette:
+       - Cream / Page BG: #FAF6EE (soft linen ivory)
+       - Card BG:         #FFFFFF
+       - Terracotta:      #723F1E (Primary Brand Action & Accent)
+       - Terracotta Hover:#5D3318
+       - Terracotta Active:#4A2813
+       - Terracotta Light: #FBF2EB
+       - Terracotta Glow: rgba(114, 63, 30, 0.22)
+       - Olive:           #484831 (Brand Secondary / Grounding Dark)
+       - Olive Light:     #F1F3EA
+       - Berry / Maroon:  #80142F (Chart & Stat Accent)
+     ======================================================== */
+  --brand-cream: #FAF6EE;
+  --brand-cream-soft: #FCF8F2;
+  --brand-cream-muted: #F6EEE0;
 
-  --brand-accent: #723F1E;           /* Official Warm Earth Brown / Terracotta */
-  --brand-accent-hover: #5B3218;     /* Deeper Earth Brown */
-  --brand-accent-active: #472611;
-  --brand-accent-light: rgba(114, 63, 30, 0.08);
-  --brand-accent-focus-ring: rgba(114, 63, 30, 0.22);
+  --brand-terracotta: #723F1E;
+  --brand-terracotta-hover: #5D3318;
+  --brand-terracotta-active: #4A2813;
+  --brand-terracotta-light: #FBF2EB;
+  --brand-terracotta-glow: rgba(114, 63, 30, 0.22);
 
-  --color-primary: var(--brand-primary);
-  --color-primary-hover: var(--brand-primary-hover);
-  --color-primary-active: var(--brand-primary-active);
-  --color-primary-light: var(--brand-primary-light);
-  --color-primary-focus-ring: var(--brand-primary-focus-ring);
+  --brand-olive: #484831;
+  --brand-olive-hover: #383826;
+  --brand-olive-active: #28281B;
+  --brand-olive-light: #F1F3EA;
+  --brand-olive-glow: rgba(72, 72, 49, 0.2);
 
-  --color-accent: var(--brand-accent);
-  --color-accent-hover: var(--brand-accent-hover);
-  --color-accent-light: var(--brand-accent-light);
+  --brand-berry: #80142F;
+  --brand-berry-light: #FDF2F4;
 
-  /* Neutral Palette - Official Warm Ivory Linen #fff7ec */
-  --color-bg-page: #FFF7EC;
+  /* Primary Brand Roles (Terracotta is the primary accent & action color) */
+  --color-primary: #723F1E;
+  --color-primary-hover: #5D3318;
+  --color-primary-active: #4A2813;
+  --color-primary-light: #FBF2EB;
+  --color-primary-focus-ring: rgba(114, 63, 30, 0.22);
+
+  --color-secondary: #484831;
+  --color-secondary-hover: #383826;
+  --color-secondary-light: #F1F3EA;
+
+  --color-accent: #723F1E;
+  --color-accent-hover: #5D3318;
+  --color-accent-light: #FBF2EB;
+
+  /* Neutral Palette - Official Warm Ivory Linen #FAF6EE */
+  --color-bg-page: #FAF6EE;
   --color-card-bg: #FFFFFF;
-  --color-text-main: #2B2B1E;
-  --color-text-muted: #5C5A48;
-  --color-text-subtle: #8E8A76;
+  --color-text-main: #25231F;
+  --color-text-muted: #5C564D;
+  --color-text-subtle: #8E877B;
 
   /* Border & Divider */
-  --color-border-card: #ECE3D2;
-  --color-border-light: #ECE3D2;
-  --color-border-subtle: #F7EFE3;
-  --color-border-hover: #DCD0BC;
+  --color-border-card: #ECE5D9;
+  --color-border-light: #ECE5D9;
+  --color-border-subtle: #F5EFE5;
+  --color-border-hover: #DCD2C2;
 
   /* Shadows */
-  --shadow-card: 0 4px 20px -2px rgba(72, 72, 49, 0.05), 0 2px 6px -1px rgba(72, 72, 49, 0.03);
-  --shadow-hover: 0 8px 24px -4px rgba(72, 72, 49, 0.12), 0 4px 8px -2px rgba(72, 72, 49, 0.06);
-  --shadow-dropdown: 0 10px 25px -5px rgba(72, 72, 49, 0.12), 0 8px 10px -6px rgba(72, 72, 49, 0.06);
+  --shadow-card: 0 4px 18px -2px rgba(114, 63, 30, 0.05), 0 2px 6px -1px rgba(72, 72, 49, 0.03);
+  --shadow-hover: 0 8px 24px -4px rgba(114, 63, 30, 0.12), 0 4px 8px -2px rgba(72, 72, 49, 0.06);
+  --shadow-dropdown: 0 10px 25px -5px rgba(114, 63, 30, 0.12), 0 8px 10px -6px rgba(72, 72, 49, 0.06);
 
   /* Border Radius */
   --radius-card: 16px;
-  --radius-btn: 8px;
+  --radius-btn: 10px;
   --radius-pill: 9999px;
 
   /* Transitions */
@@ -84,6 +111,7 @@ html, body {
   min-height: 100vh;
   width: 100%;
   position: relative;
+  background-color: var(--color-bg-page);
 }
 
 /* ==========================================================================
@@ -130,8 +158,8 @@ html, body {
 .mobile-user-avatar .avatar-circle.small {
   width: 36px;
   height: 36px;
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  background-color: var(--brand-olive);
+  color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -160,7 +188,7 @@ html, body {
   display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: rgba(37, 35, 31, 0.45);
   backdrop-filter: blur(2px);
   z-index: 95;
   opacity: 0;
@@ -217,8 +245,8 @@ html, body {
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  border-radius: var(--radius-btn);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  border-radius: 12px;
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .nav-link .nav-icon {
@@ -246,10 +274,15 @@ html, body {
   background-color: var(--color-primary);
   color: #ffffff;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.25);
 }
 
 .nav-link.active .nav-icon {
   color: #ffffff;
+}
+
+.nav-link.active .nav-icon svg {
+  stroke: #ffffff;
 }
 
 /* Sidebar Footer (Logout) */
@@ -265,9 +298,9 @@ html, body {
   gap: 10px;
   width: 100%;
   padding: 11px 16px;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1.5px solid var(--color-primary);
-  border-radius: var(--radius-btn);
+  border-radius: 10px;
   color: var(--color-primary);
   text-decoration: none;
   font-size: 0.925rem;
@@ -277,8 +310,13 @@ html, body {
 }
 
 .logout-btn:hover {
-  background-color: var(--color-primary-light);
-  box-shadow: 0 2px 8px rgba(72, 72, 49, 0.15);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.22);
+}
+
+.logout-btn:hover .logout-icon svg {
+  stroke: #ffffff;
 }
 
 /* ==========================================================================
@@ -289,25 +327,28 @@ html, body {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-page);
 }
 
 /* Top Page Header */
 .content-header {
-  height: 96px;
-  background-color: #ffffff;
-  border-bottom: 1px solid var(--color-border-light);
+  height: auto;
+  min-height: 84px;
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 36px;
+  padding: 22px 36px 18px;
 }
 
 .welcome-heading .page-title {
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 600;
-  color: var(--color-primary);
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--color-text-main);
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .welcome-heading .welcome-subtitle {
@@ -321,11 +362,11 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 18px 6px 6px;
+  padding: 5px 16px 5px 6px;
   background-color: #ffffff;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border-card);
   border-radius: var(--radius-pill);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px rgba(114, 63, 30, 0.04);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -334,15 +375,15 @@ html, body {
 
 .doctor-profile-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 4px 14px rgba(72, 72, 49, 0.12);
+  box-shadow: 0 4px 14px rgba(114, 63, 30, 0.12);
   transform: translateY(-1px);
 }
 
 .doctor-profile-card .avatar-circle {
   width: 38px;
   height: 38px;
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  background-color: var(--brand-olive);
+  color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -436,7 +477,8 @@ html, body {
 }
 
 .metric-value {
-  font-size: 2rem;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.15rem;
   font-weight: 700;
   color: var(--color-text-main);
   line-height: 1;
@@ -459,11 +501,11 @@ html, body {
 }
 
 .section-title {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  letter-spacing: 0.01em;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.01em;
 }
 
 /* Responsive Table */

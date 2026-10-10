@@ -32,12 +32,12 @@
 }
 
 .search-input-wrapper:hover {
-  border-color: var(--color-border-hover, #cbd5e1);
+  border-color: var(--color-border-hover, #DCD2C2);
 }
 
 .search-input-wrapper:focus-within {
-  border-color: var(--color-primary, #484831);
-  box-shadow: 0 0 0 3px rgba(72, 72, 49, 0.15);
+  border-color: var(--color-primary, #723F1E);
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.18);
 }
 
 .search-icon {
@@ -58,13 +58,13 @@
   padding: 0 16px 0 46px;
   font-family: inherit;
   font-size: 0.925rem;
-  color: var(--color-text-main, #1e293b);
+  color: var(--color-text-main, #25231F);
   outline: none;
   font-weight: 500;
 }
 
 .search-input::placeholder {
-  color: #94a3b8;
+  color: var(--color-text-muted, #8E877B);
   font-weight: 400;
 }
 
@@ -84,9 +84,9 @@
   height: 46px;
   padding: 0 24px;
   background-color: #ffffff;
-  border: 1.5px solid var(--color-border-light, #e2e8f0);
+  border: 1.5px solid var(--color-border-light, #ECE5D9);
   border-radius: 8px;
-  color: var(--color-primary, #484831);
+  color: var(--color-primary, #723F1E);
   font-family: inherit;
   font-size: 0.925rem;
   font-weight: 600;
@@ -96,15 +96,15 @@
 }
 
 .btn-filter:hover {
-  background-color: #f8fafc;
-  border-color: var(--color-primary, #484831);
-  box-shadow: 0 1px 4px rgba(72, 72, 49, 0.12);
+  background-color: var(--color-primary-light, #FBF2EB);
+  border-color: var(--color-primary, #723F1E);
+  box-shadow: 0 1px 4px rgba(114, 63, 30, 0.12);
 }
 
 .btn-filter.active {
-  background-color: var(--color-primary-light, #e0f2f1);
-  border-color: var(--color-primary, #484831);
-  color: var(--color-primary, #484831);
+  background-color: var(--color-primary-light, #FBF2EB);
+  border-color: var(--color-primary, #723F1E);
+  color: var(--color-primary, #723F1E);
 }
 
 .btn-icon {
@@ -121,7 +121,7 @@
   justify-content: center;
   height: 46px;
   padding: 0 34px;
-  background-color: var(--color-primary, #484831);
+  background-color: var(--color-primary, #723F1E);
   border: none;
   border-radius: 8px;
   color: #ffffff;
@@ -130,13 +130,13 @@
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(72, 72, 49, 0.2);
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color var(--transition-fast, 0.15s ease), transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
 }
 
 .btn-export:hover {
-  background-color: var(--color-primary-hover, #373725);
-  box-shadow: 0 4px 10px rgba(72, 72, 49, 0.3);
+  background-color: var(--color-primary-hover, #5D3318);
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.35);
 }
 
 .btn-export:active {
@@ -244,15 +244,15 @@
 }
 
 .patient-profile-link:hover .patient-name {
-  color: var(--color-primary, #484831);
+  color: var(--color-primary, #723F1E);
 }
 
 .patient-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--color-primary-light, #e0f2f1);
-  color: var(--color-primary, #484831);
+  background-color: var(--color-primary-light, #FBF2EB);
+  color: var(--color-primary, #723F1E);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -396,8 +396,8 @@
 }
 
 .dropdown-item:hover {
-  background-color: #f8fafc;
-  color: var(--color-primary, #484831);
+  background-color: var(--color-primary-light, #FBF2EB);
+  color: var(--color-primary, #723F1E);
 }
 
 .dropdown-item-icon {
@@ -410,7 +410,7 @@
 }
 
 .dropdown-item:hover .dropdown-item-icon {
-  color: var(--color-primary, #484831);
+  color: var(--color-primary, #723F1E);
 }
 
 /* Table Footer & Pagination */
@@ -458,9 +458,9 @@
 }
 
 .pagination-btn:hover:not(:disabled) {
-  border-color: var(--color-primary, #484831);
-  color: var(--color-primary, #484831);
-  background-color: var(--color-primary-light, #e0f2f1);
+  border-color: var(--color-primary, #723F1E);
+  color: var(--color-primary, #723F1E);
+  background-color: var(--color-primary-light, #FBF2EB);
 }
 
 .pagination-btn:disabled {
@@ -670,12 +670,12 @@
 }
 
 .filter-checkbox-item:hover .custom-checkbox {
-  border-color: #484831;
+  border-color: #723F1E;
 }
 
 .filter-checkbox:checked + .custom-checkbox {
-  background-color: #484831;
-  border-color: #484831;
+  background-color: #723F1E;
+  border-color: #723F1E;
 }
 
 .filter-checkbox:checked + .custom-checkbox::after {
@@ -711,7 +711,7 @@
 }
 
 .btn-reset-filter:hover {
-  background-color: #5B3218;
+  background-color: #5D3318;
   box-shadow: 0 4px 12px rgba(114, 63, 30, 0.35);
 }
 
@@ -1074,8 +1074,8 @@
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
-  border-color: #484831;
-  box-shadow: 0 0 0 3px rgba(72, 72, 49, 0.15);
+  border-color: #723F1E;
+  box-shadow: 0 0 0 3px rgba(114, 63, 30, 0.18);
 }
 
 .form-textarea {
@@ -1095,16 +1095,17 @@
   font-size: 0.925rem;
   font-weight: 600;
   border-radius: 8px;
-  background-color: #484831;
+  background-color: #723F1E;
   color: #ffffff;
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-add-diet:hover {
-  background-color: #373725;
-  box-shadow: 0 4px 10px rgba(72, 72, 49, 0.25);
+  background-color: #5D3318;
+  box-shadow: 0 4px 10px rgba(114, 63, 30, 0.35);
 }
 
 /* ==========================================================================
@@ -1123,7 +1124,7 @@
 }
 
 .patient-card-name {
-  color: #484831;
+  color: #723F1E;
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 4px 0;
@@ -1151,19 +1152,20 @@
 
 .btn-confirm-appointment {
   padding: 11px 28px;
-  background-color: #484831;
+  background-color: #723F1E;
   color: #ffffff;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.925rem;
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-confirm-appointment:hover {
-  background-color: #373725;
-  box-shadow: 0 4px 10px rgba(72, 72, 49, 0.25);
+  background-color: #5D3318;
+  box-shadow: 0 4px 10px rgba(114, 63, 30, 0.35);
 }
 
 /* ==========================================================================
@@ -1243,18 +1245,19 @@
   max-width: 240px;
   height: 46px;
   border-radius: 9999px;
-  background-color: #484831;
+  background-color: #723F1E;
   color: #ffffff;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(114, 63, 30, 0.25);
   transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-continue-success:hover {
-  background-color: #373725;
-  box-shadow: 0 4px 12px rgba(72, 72, 49, 0.3);
+  background-color: #5D3318;
+  box-shadow: 0 4px 12px rgba(114, 63, 30, 0.35);
   transform: translateY(-1px);
 }
 

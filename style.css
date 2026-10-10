@@ -1,48 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /* ==========================================================================
    Ocayur Doctor Portal - Responsive Stylesheet
-   Theme: Ocayur Ayurveda Lifestyle (Deep Olive & Warm Terracotta)
+   Theme: Ocayur Ayurveda Lifestyle (Warm Terracotta & Deep Olive)
    ========================================================================== */
 
 /* Design Tokens & Custom Properties */
 :root {
-  --font-family-base: 'Proxima Nova Alt', 'Proxima Nova', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-family-base: 'Outfit', 'Plus Jakarta Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   
-  /* Brand Colors - Official Palette (@studionori.co) */
-  --brand-primary: #484831;          /* Official Deep Olive Green */
-  --brand-primary-hover: #373725;    /* Deeper Olive */
-  --brand-primary-active: #28281B;   /* Darkest Olive */
-  --brand-primary-light: rgba(72, 72, 49, 0.08);
-  --brand-primary-focus-ring: rgba(72, 72, 49, 0.22);
+  /* Brand Colors - Official Palette */
+  --brand-terracotta: #723F1E;        /* Official Warm Earth Brown / Terracotta */
+  --brand-terracotta-hover: #5D3318;
+  --brand-terracotta-active: #4A2813;
+  --brand-terracotta-light: #FBF2EB;
+  --brand-terracotta-glow: rgba(114, 63, 30, 0.22);
 
-  --brand-accent: #723F1E;           /* Official Warm Earth Brown / Terracotta */
-  --brand-accent-hover: #5B3218;     /* Deeper Earth Brown */
-  --brand-accent-active: #472611;
-  --brand-accent-light: rgba(114, 63, 30, 0.08);
-  --brand-accent-focus-ring: rgba(114, 63, 30, 0.22);
+  --brand-olive: #484831;             /* Official Deep Olive Green */
+  --brand-olive-hover: #373725;
+  --brand-olive-active: #28281B;
+  --brand-olive-light: #F1F3EA;
+  --brand-olive-glow: rgba(72, 72, 49, 0.2);
   
-  --color-primary: var(--brand-primary);
-  --color-primary-hover: var(--brand-primary-hover);
-  --color-primary-active: var(--brand-primary-active);
-  --color-primary-light: var(--brand-primary-light);
-  --color-primary-focus-ring: var(--brand-primary-focus-ring);
+  /* Primary Action: Warm Terracotta */
+  --color-primary: #723F1E;
+  --color-primary-hover: #5D3318;
+  --color-primary-active: #4A2813;
+  --color-primary-light: #FBF2EB;
+  --color-primary-focus-ring: rgba(114, 63, 30, 0.22);
   
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-blue: #3B5042;
-  --color-brand-dark: #28281B;
+  --color-secondary: #484831;
+  --color-brand-accent: #723F1E;
+  --color-brand-blue: #484831;
+  --color-brand-dark: #25231F;
   
-  /* Neutral Palette - Official Warm Ivory Linen #fff7ec */
-  --color-bg-page: #FFF7EC;
+  /* Neutral Palette - Official Warm Ivory Linen #FAF6EE */
+  --color-bg-page: #FAF6EE;
   --color-card-bg: #FFFFFF;
-  --color-text-main: #2B2B1E;
-  --color-text-muted: #5C5A48;
-  --color-text-subtle: #8E8A76;
+  --color-text-main: #25231F;
+  --color-text-muted: #5C564D;
+  --color-text-subtle: #8E877B;
   
   /* Form & Border Colors */
-  --color-border-input: #ECE3D2;
-  --color-border-hover: #DCD0BC;
-  --color-border-card: #EFE7DA;
-  --color-divider: #ECE3D2;
+  --color-border-input: #ECE5D9;
+  --color-border-hover: #DCD2C2;
+  --color-border-card: #ECE5D9;
+  --color-divider: #ECE5D9;
   
   /* Status Colors */
   --color-danger: #D32F2F;
@@ -50,9 +54,9 @@
   --color-success: #2E7D32;
   
   /* Shadows */
-  --shadow-card: 0 10px 36px -10px rgba(72, 72, 49, 0.08), 0 4px 14px -4px rgba(72, 72, 49, 0.04);
-  --shadow-input-focus: 0 0 0 3px var(--brand-primary-focus-ring);
-  --shadow-dropdown: 0 10px 25px -5px rgba(72, 72, 49, 0.12), 0 8px 10px -6px rgba(72, 72, 49, 0.06);
+  --shadow-card: 0 10px 36px -10px rgba(114, 63, 30, 0.08), 0 4px 14px -4px rgba(72, 72, 49, 0.04);
+  --shadow-input-focus: 0 0 0 3px rgba(114, 63, 30, 0.2);
+  --shadow-dropdown: 0 10px 25px -5px rgba(114, 63, 30, 0.12), 0 8px 10px -6px rgba(72, 72, 49, 0.06);
   
   /* Border Radius */
   --radius-card: 18px;
@@ -445,12 +449,12 @@ html, body {
   justify-content: center;
   gap: 8px;
   margin-top: 4px;
-  box-shadow: 0 4px 14px rgba(72, 72, 49, 0.22);
+  box-shadow: 0 4px 14px rgba(114, 63, 30, 0.25);
 }
 
 .login-submit-btn:hover {
   background-color: var(--color-primary-hover);
-  box-shadow: 0 6px 20px rgba(72, 72, 49, 0.32);
+  box-shadow: 0 6px 20px rgba(114, 63, 30, 0.35);
 }
 
 .login-submit-btn:active {
